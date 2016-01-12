@@ -109,11 +109,11 @@
             // VersionNumber
             // 
             this.VersionNumber.AutoSize = true;
-            this.VersionNumber.Location = new System.Drawing.Point(19, 323);
+            this.VersionNumber.Location = new System.Drawing.Point(14, 323);
             this.VersionNumber.Name = "VersionNumber";
             this.VersionNumber.Size = new System.Drawing.Size(78, 13);
             this.VersionNumber.TabIndex = 6;
-            this.VersionNumber.Text = "Version 0.0.0.4";
+            this.VersionNumber.Text = "Version 0.0.0.0";
             this.VersionNumber.Click += new System.EventHandler(this.VersionLabel_Click);
             // 
             // ViewersList
@@ -192,6 +192,7 @@
             this.Name = "JewBot9K";
             this.Text = "Hazard Bot";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JewBot9K_FormClosed);
+            this.Load += new System.EventHandler(this.JewBot9K_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
