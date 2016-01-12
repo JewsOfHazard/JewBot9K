@@ -11,8 +11,9 @@ namespace JewBot9K.Utilities
 
         public static string realName { get; set; }
         public static bool isAuthorized { get; set; }
+        public static bool isConnected { get; set; }
         public static string username { get; set; }
         public static string oauth { get; set; }
-
+        
     }
 }

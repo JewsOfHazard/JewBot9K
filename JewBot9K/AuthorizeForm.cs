@@ -26,6 +26,8 @@ namespace JewBot9K
    
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
             File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\JewBot9KSettings.xml");
             Settings.realName = null;
             Settings.username = null;
