@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Collections.Generic;
 using System.Drawing;
+using JewBot9K.Security;
+using System.IO;
+using System.Diagnostics;
 
 namespace JewBot9K
 {
@@ -104,6 +107,7 @@ namespace JewBot9K
             if (Settings.isAuthorized && !Settings.isConnected)
             {
                 DisconnectButton.Enabled = true;
+                ConnectButton.Enabled = false;
                 Settings.isConnected = true;
                 runIrc();
             }
@@ -116,13 +120,14 @@ namespace JewBot9K
 
         private void Disconnect_Click(object sender, EventArgs e)
         {
-            if (client != null)
+            if (client.User.Nick != "")
             {
                 client.Quit();
                 label2.Text = "Disconnected";
                 label2.Location = new System.Drawing.Point(19, 127);
                 Settings.isConnected = false;
                 DisconnectButton.Enabled = false;
+                ConnectButton.Enabled = true;
             }
             else
             {
@@ -155,12 +160,15 @@ namespace JewBot9K
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
         {
-           
+            if (e.KeyCode == Keys.Enter)
+            {
+                //send irc message
+            }
         }
 
         private void VersionLabel_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/JewsOfHazard/JewBot9K/releases");
+            System.Diagnostics.Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
         }
 
         private void JewBot9K_FormClosed(object sender, FormClosedEventArgs e)
@@ -168,9 +176,41 @@ namespace JewBot9K
             Environment.Exit(0);
         }
 
+        private void loadPasswords()
+        {
+            try
+            {
+                string[] loginData = PasswordManipulation.GetPassword();
+                Settings.username = loginData[0].ToLower();
+                Settings.realName = loginData[0];
+                Settings.oauth = loginData[1];
+                if (loginData[0] != "")
+                {
+                    Settings.isConnected = true;
+                    Settings.isAuthorized = true;
+                    ConnectButton.Enabled = false;
+                    DisconnectButton.Enabled = true;
+                    runIrc();
+                }
+
+            }
+            catch (IniParser.Exceptions.ParsingException)
+            {
+                //do nothing, we just have not saved the file yet
+            }
+        }
+
+        private string getVersion()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fvi.FileVersion;
+        }
+
         private void JewBot9K_Load(object sender, EventArgs e)
         {
-
+            loadPasswords();
+            VersionNumber.Text = "Version: " + getVersion();
         }
     }
 }

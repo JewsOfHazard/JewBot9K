@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using JewBot9K.Utilities;
-using System.Security;
 using System.Text;
 using System.IO;
+using JewBot9K.Security;
 
 namespace JewBot9K
 {
@@ -28,7 +28,7 @@ namespace JewBot9K
         {
             textBox1.Text = "";
             textBox2.Text = "";
-            File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\JewBot9KSettings.xml");
+            File.Delete(Application.StartupPath + "\\JewBot9KSettings.ini");
             Settings.realName = null;
             Settings.username = null;
             Settings.oauth = null;
@@ -51,8 +51,7 @@ namespace JewBot9K
         }
         private void SaveData(string username, string password)
         {
-            byte[] usernameByteArray = Encoding.UTF8.GetBytes(username);
-            byte[] passwordByteArray = Encoding.UTF8.GetBytes(password);
+            PasswordManipulation.SavePassword(username, password);
             //to do tomorrow
         }
     }

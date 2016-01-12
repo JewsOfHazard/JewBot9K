@@ -109,11 +109,11 @@
             // VersionNumber
             // 
             this.VersionNumber.AutoSize = true;
-            this.VersionNumber.Location = new System.Drawing.Point(19, 323);
+            this.VersionNumber.Location = new System.Drawing.Point(14, 323);
             this.VersionNumber.Name = "VersionNumber";
             this.VersionNumber.Size = new System.Drawing.Size(78, 13);
             this.VersionNumber.TabIndex = 6;
-            this.VersionNumber.Text = "Version 0.0.0.4";
+            this.VersionNumber.Text = "Version 0.0.0.0";
             this.VersionNumber.Click += new System.EventHandler(this.VersionLabel_Click);
             // 
             // ViewersList
