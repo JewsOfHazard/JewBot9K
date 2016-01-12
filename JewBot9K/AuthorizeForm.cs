@@ -53,7 +53,7 @@ namespace JewBot9K
         {
             byte[] usernameByteArray = Encoding.UTF8.GetBytes(username);
             byte[] passwordByteArray = Encoding.UTF8.GetBytes(password);
-            //to complete after stream
+            //to do tomorrow
         }
     }
 }
