@@ -176,7 +176,7 @@ namespace JewBot9K
                 IrcChannel channel = client.Channels[0];
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);
                 channel.SendMessage(message);
-                ChatWindow.AppendText(Settings.realName + ": " + message + "\n");
+                ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
                 ChatBox.Clear();
             }
         }
@@ -197,7 +197,7 @@ namespace JewBot9K
             {
                 string[] loginData = PasswordManipulation.GetPassword();
                 Settings.username = loginData[0].ToLower();
-                Settings.realName = loginData[0];
+                Settings.displayName = loginData[0];
                 Settings.oauth = loginData[1];
                 if (loginData[0] != "")
                 {

@@ -9,7 +9,7 @@ namespace JewBot9K.Utilities
     class Settings
     {
 
-        public static string realName { get; set; }
+        public static string displayName { get; set; }
         public static bool isAuthorized { get; set; }
         public static bool isConnected { get; set; }
         public static string username { get; set; }
