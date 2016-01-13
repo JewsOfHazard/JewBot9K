@@ -42,17 +42,17 @@
             this.ConnectButton = new System.Windows.Forms.Button();
             this.AuthButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.TitleUpdateBox = new System.Windows.Forms.TextBox();
-            this.GameUpdateBox = new System.Windows.Forms.TextBox();
-            this.TitleGameUpdateButton = new System.Windows.Forms.Button();
-            this.DashboardTitleLabel = new System.Windows.Forms.Label();
-            this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
-            this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
-            this.CommercialCheckBox = new System.Windows.Forms.CheckBox();
-            this.CommercialPanel = new System.Windows.Forms.Panel();
-            this.RefreshChannel = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.RefreshChannel = new System.Windows.Forms.Button();
+            this.CommercialCheckBox = new System.Windows.Forms.CheckBox();
+            this.DashboardTitleLabel = new System.Windows.Forms.Label();
+            this.CommercialPanel = new System.Windows.Forms.Panel();
+            this.TitleUpdateBox = new System.Windows.Forms.TextBox();
+            this.TitleGameUpdateButton = new System.Windows.Forms.Button();
+            this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
+            this.GameUpdateBox = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -189,93 +189,6 @@
             this.tabPage2.Text = "Dashboard";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 15000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // TitleUpdateBox
-            // 
-            this.TitleUpdateBox.Location = new System.Drawing.Point(119, 10);
-            this.TitleUpdateBox.Name = "TitleUpdateBox";
-            this.TitleUpdateBox.Size = new System.Drawing.Size(211, 20);
-            this.TitleUpdateBox.TabIndex = 0;
-            // 
-            // GameUpdateBox
-            // 
-            this.GameUpdateBox.Location = new System.Drawing.Point(395, 9);
-            this.GameUpdateBox.Name = "GameUpdateBox";
-            this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
-            this.GameUpdateBox.TabIndex = 1;
-            // 
-            // TitleGameUpdateButton
-            // 
-            this.TitleGameUpdateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleGameUpdateButton.Location = new System.Drawing.Point(591, 7);
-            this.TitleGameUpdateButton.Name = "TitleGameUpdateButton";
-            this.TitleGameUpdateButton.Size = new System.Drawing.Size(75, 23);
-            this.TitleGameUpdateButton.TabIndex = 2;
-            this.TitleGameUpdateButton.Text = "Update";
-            this.TitleGameUpdateButton.UseVisualStyleBackColor = true;
-            this.TitleGameUpdateButton.Click += new System.EventHandler(this.TitleGameUpdateButton_Click);
-            // 
-            // DashboardTitleLabel
-            // 
-            this.DashboardTitleLabel.AutoSize = true;
-            this.DashboardTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DashboardTitleLabel.Location = new System.Drawing.Point(80, 11);
-            this.DashboardTitleLabel.Name = "DashboardTitleLabel";
-            this.DashboardTitleLabel.Size = new System.Drawing.Size(39, 18);
-            this.DashboardTitleLabel.TabIndex = 3;
-            this.DashboardTitleLabel.Text = "Title:";
-            // 
-            // DashboardGameUpdateLabel
-            // 
-            this.DashboardGameUpdateLabel.AutoSize = true;
-            this.DashboardGameUpdateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DashboardGameUpdateLabel.Location = new System.Drawing.Point(336, 11);
-            this.DashboardGameUpdateLabel.Name = "DashboardGameUpdateLabel";
-            this.DashboardGameUpdateLabel.Size = new System.Drawing.Size(53, 18);
-            this.DashboardGameUpdateLabel.TabIndex = 4;
-            this.DashboardGameUpdateLabel.Text = "Game:";
-            // 
-            // DisconnectTimer
-            // 
-            this.DisconnectTimer.Enabled = true;
-            this.DisconnectTimer.Interval = 250;
-            this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
-            // 
-            // CommercialCheckBox
-            // 
-            this.CommercialCheckBox.AutoSize = true;
-            this.CommercialCheckBox.BackColor = System.Drawing.Color.Gainsboro;
-            this.CommercialCheckBox.Location = new System.Drawing.Point(19, 45);
-            this.CommercialCheckBox.Name = "CommercialCheckBox";
-            this.CommercialCheckBox.Size = new System.Drawing.Size(80, 17);
-            this.CommercialCheckBox.TabIndex = 6;
-            this.CommercialCheckBox.Text = "Commercial";
-            this.CommercialCheckBox.UseVisualStyleBackColor = false;
-            this.CommercialCheckBox.CheckedChanged += new System.EventHandler(this.CommercialTextBox_CheckedChanged);
-            // 
-            // CommercialPanel
-            // 
-            this.CommercialPanel.BackColor = System.Drawing.Color.Gainsboro;
-            this.CommercialPanel.Location = new System.Drawing.Point(3, 53);
-            this.CommercialPanel.Name = "CommercialPanel";
-            this.CommercialPanel.Size = new System.Drawing.Size(663, 165);
-            this.CommercialPanel.TabIndex = 7;
-            // 
-            // RefreshChannel
-            // 
-            this.RefreshChannel.Location = new System.Drawing.Point(3, 8);
-            this.RefreshChannel.Name = "RefreshChannel";
-            this.RefreshChannel.Size = new System.Drawing.Size(75, 23);
-            this.RefreshChannel.TabIndex = 1;
-            this.RefreshChannel.Text = "Refresh";
-            this.RefreshChannel.UseVisualStyleBackColor = true;
-            this.RefreshChannel.Click += new System.EventHandler(this.RefreshChannel_Click);
-            // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -292,6 +205,93 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(683, 351);
             this.panel1.TabIndex = 8;
+            // 
+            // RefreshChannel
+            // 
+            this.RefreshChannel.Location = new System.Drawing.Point(3, 8);
+            this.RefreshChannel.Name = "RefreshChannel";
+            this.RefreshChannel.Size = new System.Drawing.Size(75, 23);
+            this.RefreshChannel.TabIndex = 1;
+            this.RefreshChannel.Text = "Refresh";
+            this.RefreshChannel.UseVisualStyleBackColor = true;
+            this.RefreshChannel.Click += new System.EventHandler(this.RefreshChannel_Click);
+            // 
+            // CommercialCheckBox
+            // 
+            this.CommercialCheckBox.AutoSize = true;
+            this.CommercialCheckBox.BackColor = System.Drawing.Color.Gainsboro;
+            this.CommercialCheckBox.Location = new System.Drawing.Point(19, 45);
+            this.CommercialCheckBox.Name = "CommercialCheckBox";
+            this.CommercialCheckBox.Size = new System.Drawing.Size(80, 17);
+            this.CommercialCheckBox.TabIndex = 6;
+            this.CommercialCheckBox.Text = "Commercial";
+            this.CommercialCheckBox.UseVisualStyleBackColor = false;
+            this.CommercialCheckBox.CheckedChanged += new System.EventHandler(this.CommercialTextBox_CheckedChanged);
+            // 
+            // DashboardTitleLabel
+            // 
+            this.DashboardTitleLabel.AutoSize = true;
+            this.DashboardTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DashboardTitleLabel.Location = new System.Drawing.Point(80, 11);
+            this.DashboardTitleLabel.Name = "DashboardTitleLabel";
+            this.DashboardTitleLabel.Size = new System.Drawing.Size(39, 18);
+            this.DashboardTitleLabel.TabIndex = 3;
+            this.DashboardTitleLabel.Text = "Title:";
+            // 
+            // CommercialPanel
+            // 
+            this.CommercialPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.CommercialPanel.Location = new System.Drawing.Point(3, 53);
+            this.CommercialPanel.Name = "CommercialPanel";
+            this.CommercialPanel.Size = new System.Drawing.Size(663, 165);
+            this.CommercialPanel.TabIndex = 7;
+            // 
+            // TitleUpdateBox
+            // 
+            this.TitleUpdateBox.Location = new System.Drawing.Point(119, 10);
+            this.TitleUpdateBox.Name = "TitleUpdateBox";
+            this.TitleUpdateBox.Size = new System.Drawing.Size(211, 20);
+            this.TitleUpdateBox.TabIndex = 0;
+            // 
+            // TitleGameUpdateButton
+            // 
+            this.TitleGameUpdateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleGameUpdateButton.Location = new System.Drawing.Point(591, 7);
+            this.TitleGameUpdateButton.Name = "TitleGameUpdateButton";
+            this.TitleGameUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.TitleGameUpdateButton.TabIndex = 2;
+            this.TitleGameUpdateButton.Text = "Update";
+            this.TitleGameUpdateButton.UseVisualStyleBackColor = true;
+            this.TitleGameUpdateButton.Click += new System.EventHandler(this.TitleGameUpdateButton_Click);
+            // 
+            // DashboardGameUpdateLabel
+            // 
+            this.DashboardGameUpdateLabel.AutoSize = true;
+            this.DashboardGameUpdateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DashboardGameUpdateLabel.Location = new System.Drawing.Point(336, 11);
+            this.DashboardGameUpdateLabel.Name = "DashboardGameUpdateLabel";
+            this.DashboardGameUpdateLabel.Size = new System.Drawing.Size(53, 18);
+            this.DashboardGameUpdateLabel.TabIndex = 4;
+            this.DashboardGameUpdateLabel.Text = "Game:";
+            // 
+            // GameUpdateBox
+            // 
+            this.GameUpdateBox.Location = new System.Drawing.Point(395, 9);
+            this.GameUpdateBox.Name = "GameUpdateBox";
+            this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
+            this.GameUpdateBox.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 15000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // DisconnectTimer
+            // 
+            this.DisconnectTimer.Enabled = true;
+            this.DisconnectTimer.Interval = 250;
+            this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
             // 
             // JewBot9K
             // 

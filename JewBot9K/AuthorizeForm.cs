@@ -15,7 +15,7 @@ namespace JewBot9K
             if (Settings.isAuthorized)
             {
                 button2.Enabled = true;
-                textBox1.Text = Settings.realName;
+                textBox1.Text = Settings.displayName;
                 textBox2.Text = Settings.oauth;
             }
             else
@@ -29,7 +29,7 @@ namespace JewBot9K
             textBox1.Text = "";
             textBox2.Text = "";
             File.Delete(Application.StartupPath + "\\JewBot9KSettings.ini");
-            Settings.realName = null;
+            Settings.displayName = null;
             Settings.username = null;
             Settings.oauth = null;
             Settings.isAuthorized = false;
@@ -44,7 +44,7 @@ namespace JewBot9K
 
         private void button3_Click(object sender, EventArgs e)//submit button
         {
-            Settings.realName = textBox1.Text;
+            Settings.displayName = textBox1.Text;
             Settings.username = textBox1.Text.ToLower();
             Settings.oauth = textBox2.Text;
             Settings.isAuthorized = true;
