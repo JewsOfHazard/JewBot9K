@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JewBot9K));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.DisconnectButton = new System.Windows.Forms.Button();
             this.ChatWindow = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ChatBox = new System.Windows.Forms.TextBox();
             this.VersionNumber = new System.Windows.Forms.Label();
             this.ViewersList = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,8 +43,15 @@
             this.AuthButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.TitleUpdateBox = new System.Windows.Forms.TextBox();
+            this.GameUpdateBox = new System.Windows.Forms.TextBox();
+            this.TitleGameUpdateButton = new System.Windows.Forms.Button();
+            this.DashboardTitleLabel = new System.Windows.Forms.Label();
+            this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
+            this.DashboardLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -60,7 +68,7 @@
             // 
             this.tabPage1.Controls.Add(this.DisconnectButton);
             this.tabPage1.Controls.Add(this.ChatWindow);
-            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.ChatBox);
             this.tabPage1.Controls.Add(this.VersionNumber);
             this.tabPage1.Controls.Add(this.ViewersList);
             this.tabPage1.Controls.Add(this.label2);
@@ -72,7 +80,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(683, 351);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Dashboard";
+            this.tabPage1.Text = "Chat";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // DisconnectButton
@@ -96,15 +104,15 @@
             this.ChatWindow.Size = new System.Drawing.Size(456, 308);
             this.ChatWindow.TabIndex = 8;
             // 
-            // textBox2
+            // ChatBox
             // 
-            this.textBox2.AcceptsReturn = true;
-            this.textBox2.Location = new System.Drawing.Point(106, 317);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(571, 24);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChatBox_KeyDown);
+            this.ChatBox.AcceptsReturn = true;
+            this.ChatBox.Location = new System.Drawing.Point(106, 317);
+            this.ChatBox.Multiline = true;
+            this.ChatBox.Name = "ChatBox";
+            this.ChatBox.Size = new System.Drawing.Size(571, 24);
+            this.ChatBox.TabIndex = 7;
+            this.ChatBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChatBox_KeyDown);
             // 
             // VersionNumber
             // 
@@ -167,12 +175,18 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.DashboardLabel);
+            this.tabPage2.Controls.Add(this.DashboardGameUpdateLabel);
+            this.tabPage2.Controls.Add(this.DashboardTitleLabel);
+            this.tabPage2.Controls.Add(this.TitleGameUpdateButton);
+            this.tabPage2.Controls.Add(this.GameUpdateBox);
+            this.tabPage2.Controls.Add(this.TitleUpdateBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(683, 351);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "NextUP!";
+            this.tabPage2.Text = "Dashboard";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // timer1
@@ -181,6 +195,61 @@
             this.timer1.Interval = 15000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // TitleUpdateBox
+            // 
+            this.TitleUpdateBox.Location = new System.Drawing.Point(154, 10);
+            this.TitleUpdateBox.Name = "TitleUpdateBox";
+            this.TitleUpdateBox.Size = new System.Drawing.Size(190, 20);
+            this.TitleUpdateBox.TabIndex = 0;
+            // 
+            // GameUpdateBox
+            // 
+            this.GameUpdateBox.Location = new System.Drawing.Point(406, 9);
+            this.GameUpdateBox.Name = "GameUpdateBox";
+            this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
+            this.GameUpdateBox.TabIndex = 1;
+            // 
+            // TitleGameUpdateButton
+            // 
+            this.TitleGameUpdateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleGameUpdateButton.Location = new System.Drawing.Point(602, 8);
+            this.TitleGameUpdateButton.Name = "TitleGameUpdateButton";
+            this.TitleGameUpdateButton.Size = new System.Drawing.Size(75, 23);
+            this.TitleGameUpdateButton.TabIndex = 2;
+            this.TitleGameUpdateButton.Text = "Update";
+            this.TitleGameUpdateButton.UseVisualStyleBackColor = true;
+            this.TitleGameUpdateButton.Click += new System.EventHandler(this.TitleGameUpdateButton_Click);
+            // 
+            // DashboardTitleLabel
+            // 
+            this.DashboardTitleLabel.AutoSize = true;
+            this.DashboardTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DashboardTitleLabel.Location = new System.Drawing.Point(112, 11);
+            this.DashboardTitleLabel.Name = "DashboardTitleLabel";
+            this.DashboardTitleLabel.Size = new System.Drawing.Size(39, 18);
+            this.DashboardTitleLabel.TabIndex = 3;
+            this.DashboardTitleLabel.Text = "Title:";
+            // 
+            // DashboardGameUpdateLabel
+            // 
+            this.DashboardGameUpdateLabel.AutoSize = true;
+            this.DashboardGameUpdateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DashboardGameUpdateLabel.Location = new System.Drawing.Point(350, 9);
+            this.DashboardGameUpdateLabel.Name = "DashboardGameUpdateLabel";
+            this.DashboardGameUpdateLabel.Size = new System.Drawing.Size(53, 18);
+            this.DashboardGameUpdateLabel.TabIndex = 4;
+            this.DashboardGameUpdateLabel.Text = "Game:";
+            // 
+            // DashboardLabel
+            // 
+            this.DashboardLabel.AutoSize = true;
+            this.DashboardLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DashboardLabel.Location = new System.Drawing.Point(6, 6);
+            this.DashboardLabel.Name = "DashboardLabel";
+            this.DashboardLabel.Size = new System.Drawing.Size(106, 26);
+            this.DashboardLabel.TabIndex = 5;
+            this.DashboardLabel.Text = "Dasboard";
+            // 
             // JewBot9K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,6 +257,7 @@
             this.ClientSize = new System.Drawing.Size(686, 375);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "JewBot9K";
             this.Text = "Hazard Bot";
@@ -196,6 +266,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -209,12 +281,18 @@
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Button AuthButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.Label VersionNumber;
         private System.Windows.Forms.ListBox ViewersList;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox ChatWindow;
         private System.Windows.Forms.Button DisconnectButton;
+        private System.Windows.Forms.Label DashboardGameUpdateLabel;
+        private System.Windows.Forms.Label DashboardTitleLabel;
+        private System.Windows.Forms.Button TitleGameUpdateButton;
+        private System.Windows.Forms.TextBox GameUpdateBox;
+        private System.Windows.Forms.TextBox TitleUpdateBox;
+        private System.Windows.Forms.Label DashboardLabel;
     }
 }
 
