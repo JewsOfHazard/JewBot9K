@@ -268,16 +268,18 @@ namespace JewBot9K
 
         private void CommercialTextBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (CommercialTextBox.Checked)
+            if (CommercialCheckBox.Checked)
             {
                 CommercialPanel.Enabled = true;
                 CommercialPanel.BackColor = Color.LightGray;
+                CommercialCheckBox.BackColor = Color.LightGray;
                 Settings.commercialEnabled = true;
             }
-            else if (!CommercialTextBox.Checked)
+            else if (!CommercialCheckBox.Checked)
             {
                 CommercialPanel.Enabled = false;
                 CommercialPanel.BackColor = Color.Gainsboro;
+                CommercialCheckBox.BackColor = Color.Gainsboro;
                 Settings.commercialEnabled = false;
             }
         }
@@ -293,7 +295,7 @@ namespace JewBot9K
             GameUpdateBox.Text = json.game;
         }
 
-        private async void RefreshChannel_Click(object sender, EventArgs e)
+        private void RefreshChannel_Click(object sender, EventArgs e)
         {
             UpdateChannelTitleAndText();
         }
