@@ -8,8 +8,8 @@ using System.Net;
 using System.Collections.Generic;
 using System.Drawing;
 using JewBot9K.Security;
-using System.IO;
 using System.Diagnostics;
+using RestSharp;
 
 namespace JewBot9K
 {
@@ -102,7 +102,7 @@ namespace JewBot9K
             form.Show();
         }
 
-        private void ConnectButton_Click(object sender, EventArgs e)
+        private void connectIrc()
         {
             if (Settings.isAuthorized && !Settings.isConnected)
             {
@@ -118,13 +118,18 @@ namespace JewBot9K
 
         }
 
+        private void ConnectButton_Click(object sender, EventArgs e)
+        {
+            connectIrc();
+        }
+
         private void Disconnect_Click(object sender, EventArgs e)
         {
             if (client.User.Nick != "")
             {
                 client.Quit();
                 label2.Text = "Disconnected";
-                label2.Location = new System.Drawing.Point(19, 127);
+                label2.Location = new Point(19, 127);
                 Settings.isConnected = false;
                 DisconnectButton.Enabled = false;
                 ConnectButton.Enabled = true;
@@ -160,15 +165,19 @@ namespace JewBot9K
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && Settings.isConnected)
             {
-                //send irc message
+                IrcChannel channel = client.Channels[0];
+                string message = ChatBox.Text.Replace("\r\n", string.Empty);
+                channel.SendMessage(message);
+                ChatWindow.AppendText(Settings.realName + ": " + message + "\n");
+                ChatBox.Clear();
             }
         }
 
         private void VersionLabel_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
+           Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
         }
 
         private void JewBot9K_FormClosed(object sender, FormClosedEventArgs e)
@@ -186,11 +195,8 @@ namespace JewBot9K
                 Settings.oauth = loginData[1];
                 if (loginData[0] != "")
                 {
-                    Settings.isConnected = true;
                     Settings.isAuthorized = true;
-                    ConnectButton.Enabled = false;
-                    DisconnectButton.Enabled = true;
-                    runIrc();
+                    connectIrc();
                 }
 
             }
@@ -211,6 +217,27 @@ namespace JewBot9K
         {
             loadPasswords();
             VersionNumber.Text = "Version: " + getVersion();
+        }
+
+        private void TitleGameUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (Settings.isAuthorized)
+            {
+                string title = TitleUpdateBox.Text;
+                string game = GameUpdateBox.Text;
+
+                var client = new RestClient("https://api.twitch.tv/kraken/channels/" + Settings.username);
+                var request = new RestRequest(Method.PUT);
+                request.AddHeader("authorization", "OAuth " + Settings.oauth.Substring(6));
+                request.AddHeader("content-type", "application/json");
+                request.AddHeader("accept", "application/vnd.twitchtv.v2+json");
+                request.AddParameter("channel[status]", title);
+                request.AddParameter("channel[game]", game);
+
+                IRestResponse response = client.Execute(request);
+
+            }
+            //https://api.twitch.tv/kraken/channels/" + Settings.username
         }
     }
 }
