@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using JewBot9K.Security;
 using System.Diagnostics;
+using JewBot9K.Utilities.Twitch;
 using RestSharp;
 
 namespace JewBot9K
@@ -67,7 +68,7 @@ namespace JewBot9K
             {
                 using (WebClient wc = new WebClient())
                 {
-                    json = JsonConvert.DeserializeObject<Utilities.Twitch.LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync("https://tmi.twitch.tv/group/user/" + Settings.username + "/chatters"));
+                    json = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync("https://tmi.twitch.tv/group/user/" + Settings.username + "/chatters"));
                 }
                 ViewersList.Items.Clear();
                 foreach (string item in json.chatters.viewers)
@@ -123,9 +124,9 @@ namespace JewBot9K
             connectIrc();
         }
 
-        private void Disconnect_Click(object sender, EventArgs e)
+        private void disconnectIrc()
         {
-            if (client.User.Nick != "")
+            if (client != null && client.User.Nick != "")
             {
                 client.Quit();
                 label2.Text = "Disconnected";
@@ -142,13 +143,18 @@ namespace JewBot9K
             }
         }
 
+        private void Disconnect_Click(object sender, EventArgs e)
+        {
+            disconnectIrc();
+        }
+
         private async void ViewersList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (ViewersList.SelectedItem != null)
             {
                 using (WebClient wc = new WebClient())
                 {
-                    Utilities.Twitch.User.Rootobject user = JsonConvert.DeserializeObject<Utilities.Twitch.User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/users/" + ViewersList.SelectedItem.ToString()));
+                    Utilities.Twitch.User.Rootobject user = JsonConvert.DeserializeObject<User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/users/" + ViewersList.SelectedItem.ToString()));
                     UserInformation userinfo;
                     try
                     {
@@ -217,27 +223,79 @@ namespace JewBot9K
         {
             loadPasswords();
             VersionNumber.Text = "Version: " + getVersion();
+            UpdateChannelTitleAndText();
+        }
+
+        private IRestResponse MakeTwitchRequest(Uri url, Method requestMethod, Dictionary<string, string> headers, Dictionary<string, string> parameters)
+        {
+            var client = new RestClient(url);
+            var request = new RestRequest(requestMethod);
+
+            foreach (KeyValuePair<string, string> item in headers)
+                request.AddHeader(item.Key, item.Value);
+            foreach (KeyValuePair<string, string> item in parameters)
+                request.AddParameter(item.Key, item.Value);
+
+            return client.Execute(request);
         }
 
         private void TitleGameUpdateButton_Click(object sender, EventArgs e)
         {
             if (Settings.isAuthorized)
             {
-                string title = TitleUpdateBox.Text;
-                string game = GameUpdateBox.Text;
+                Dictionary<string, string> headers = new Dictionary<string, string>();
+                headers["authorization"] = "OAuth " + Settings.oauth.Substring(6);
+                headers["content-type"] = "application/json";
+                headers["accept"] = "application/vnd.twitchtv.v2+json";
 
-                var client = new RestClient("https://api.twitch.tv/kraken/channels/" + Settings.username);
-                var request = new RestRequest(Method.PUT);
-                request.AddHeader("authorization", "OAuth " + Settings.oauth.Substring(6));
-                request.AddHeader("content-type", "application/json");
-                request.AddHeader("accept", "application/vnd.twitchtv.v2+json");
-                request.AddParameter("channel[status]", title);
-                request.AddParameter("channel[game]", game);
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters["channel[status]"] = TitleUpdateBox.Text;
+                parameters["channel[game]"] = GameUpdateBox.Text;
 
-                IRestResponse response = client.Execute(request);
-
+                var request = MakeTwitchRequest(new Uri("https://api.twitch.tv/kraken/channels/" + Settings.username), Method.PUT, headers, parameters);
             }
             //https://api.twitch.tv/kraken/channels/" + Settings.username
+        }
+
+        private void DisconnectTimer_Tick(object sender, EventArgs e)
+        {
+            if (!Settings.isAuthorized && Settings.isConnected)
+            {
+                
+                disconnectIrc();
+            }
+        }
+
+        private void CommercialTextBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CommercialTextBox.Checked)
+            {
+                CommercialPanel.Enabled = true;
+                CommercialPanel.BackColor = Color.LightGray;
+                Settings.commercialEnabled = true;
+            }
+            else if (!CommercialTextBox.Checked)
+            {
+                CommercialPanel.Enabled = false;
+                CommercialPanel.BackColor = Color.Gainsboro;
+                Settings.commercialEnabled = false;
+            }
+        }
+
+        private async void UpdateChannelTitleAndText()
+        {
+            TwitchChannel.Rootobject json;
+            using (WebClient wc = new WebClient())
+            {
+                json = JsonConvert.DeserializeObject<TwitchChannel.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/channels/" + Settings.username));
+            }
+            TitleUpdateBox.Text = json.status;
+            GameUpdateBox.Text = json.game;
+        }
+
+        private async void RefreshChannel_Click(object sender, EventArgs e)
+        {
+            UpdateChannelTitleAndText();
         }
     }
 }
