@@ -14,6 +14,7 @@ namespace JewBot9K.Utilities
         public static bool isConnected { get; set; }
         public static string username { get; set; }
         public static string oauth { get; set; }
+        public static bool commercialEnabled { get; set; }
         
     }
 }

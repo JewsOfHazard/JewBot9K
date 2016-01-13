@@ -48,7 +48,10 @@
             this.TitleGameUpdateButton = new System.Windows.Forms.Button();
             this.DashboardTitleLabel = new System.Windows.Forms.Label();
             this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
-            this.DashboardLabel = new System.Windows.Forms.Label();
+            this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
+            this.CommercialTextBox = new System.Windows.Forms.CheckBox();
+            this.CommercialPanel = new System.Windows.Forms.Panel();
+            this.RefreshChannel = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -175,7 +178,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.DashboardLabel);
+            this.tabPage2.Controls.Add(this.CommercialTextBox);
+            this.tabPage2.Controls.Add(this.RefreshChannel);
+            this.tabPage2.Controls.Add(this.CommercialPanel);
             this.tabPage2.Controls.Add(this.DashboardGameUpdateLabel);
             this.tabPage2.Controls.Add(this.DashboardTitleLabel);
             this.tabPage2.Controls.Add(this.TitleGameUpdateButton);
@@ -197,9 +202,9 @@
             // 
             // TitleUpdateBox
             // 
-            this.TitleUpdateBox.Location = new System.Drawing.Point(154, 10);
+            this.TitleUpdateBox.Location = new System.Drawing.Point(133, 10);
             this.TitleUpdateBox.Name = "TitleUpdateBox";
-            this.TitleUpdateBox.Size = new System.Drawing.Size(190, 20);
+            this.TitleUpdateBox.Size = new System.Drawing.Size(211, 20);
             this.TitleUpdateBox.TabIndex = 0;
             // 
             // GameUpdateBox
@@ -224,7 +229,7 @@
             // 
             this.DashboardTitleLabel.AutoSize = true;
             this.DashboardTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DashboardTitleLabel.Location = new System.Drawing.Point(112, 11);
+            this.DashboardTitleLabel.Location = new System.Drawing.Point(88, 11);
             this.DashboardTitleLabel.Name = "DashboardTitleLabel";
             this.DashboardTitleLabel.Size = new System.Drawing.Size(39, 18);
             this.DashboardTitleLabel.TabIndex = 3;
@@ -240,15 +245,40 @@
             this.DashboardGameUpdateLabel.TabIndex = 4;
             this.DashboardGameUpdateLabel.Text = "Game:";
             // 
-            // DashboardLabel
+            // DisconnectTimer
             // 
-            this.DashboardLabel.AutoSize = true;
-            this.DashboardLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DashboardLabel.Location = new System.Drawing.Point(6, 6);
-            this.DashboardLabel.Name = "DashboardLabel";
-            this.DashboardLabel.Size = new System.Drawing.Size(106, 26);
-            this.DashboardLabel.TabIndex = 5;
-            this.DashboardLabel.Text = "Dasboard";
+            this.DisconnectTimer.Enabled = true;
+            this.DisconnectTimer.Interval = 250;
+            this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
+            // 
+            // CommercialTextBox
+            // 
+            this.CommercialTextBox.AutoSize = true;
+            this.CommercialTextBox.Location = new System.Drawing.Point(14, 41);
+            this.CommercialTextBox.Name = "CommercialTextBox";
+            this.CommercialTextBox.Size = new System.Drawing.Size(80, 17);
+            this.CommercialTextBox.TabIndex = 6;
+            this.CommercialTextBox.Text = "Commercial";
+            this.CommercialTextBox.UseVisualStyleBackColor = true;
+            this.CommercialTextBox.CheckedChanged += new System.EventHandler(this.CommercialTextBox_CheckedChanged);
+            // 
+            // CommercialPanel
+            // 
+            this.CommercialPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.CommercialPanel.Location = new System.Drawing.Point(11, 61);
+            this.CommercialPanel.Name = "CommercialPanel";
+            this.CommercialPanel.Size = new System.Drawing.Size(660, 128);
+            this.CommercialPanel.TabIndex = 7;
+            // 
+            // RefreshChannel
+            // 
+            this.RefreshChannel.Location = new System.Drawing.Point(11, 8);
+            this.RefreshChannel.Name = "RefreshChannel";
+            this.RefreshChannel.Size = new System.Drawing.Size(75, 23);
+            this.RefreshChannel.TabIndex = 1;
+            this.RefreshChannel.Text = "Refresh";
+            this.RefreshChannel.UseVisualStyleBackColor = true;
+            this.RefreshChannel.Click += new System.EventHandler(this.RefreshChannel_Click);
             // 
             // JewBot9K
             // 
@@ -260,7 +290,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "JewBot9K";
-            this.Text = "Hazard Bot";
+            this.Text = "JewBot9K";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JewBot9K_FormClosed);
             this.Load += new System.EventHandler(this.JewBot9K_Load);
             this.tabControl1.ResumeLayout(false);
@@ -292,7 +322,10 @@
         private System.Windows.Forms.Button TitleGameUpdateButton;
         private System.Windows.Forms.TextBox GameUpdateBox;
         private System.Windows.Forms.TextBox TitleUpdateBox;
-        private System.Windows.Forms.Label DashboardLabel;
+        private System.Windows.Forms.Timer DisconnectTimer;
+        private System.Windows.Forms.CheckBox CommercialTextBox;
+        private System.Windows.Forms.Panel CommercialPanel;
+        private System.Windows.Forms.Button RefreshChannel;
     }
 }
 

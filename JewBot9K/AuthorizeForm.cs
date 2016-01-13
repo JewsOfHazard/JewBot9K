@@ -33,14 +33,16 @@ namespace JewBot9K
             Settings.username = null;
             Settings.oauth = null;
             Settings.isAuthorized = false;
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=f9zg203ybd5xm8vzpl69nllx9d1amf1&redirect_uri=http://jewsofhazard.com/oauth&scope=user_read+user_blocks_read+user_blocks_edit+channel_editor+channel_commercial+channel_subscriptions+chat_login+channel_check_subscription");
+            Settings.isAuthorized = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)//submit button
         {
             Settings.realName = textBox1.Text;
             Settings.username = textBox1.Text.ToLower();
