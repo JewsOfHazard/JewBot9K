@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JewBot9K.Utilities.Twitch
-{ 
+﻿namespace JewBot9K.Utilities.Twitch
+{
     public class LiveViewers
     {
         public class Rootobject
