@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using JewBot9K.Utilities;
 using System.Text;
 using System.IO;
-using JewBot9K.Security;
 
 namespace JewBot9K
 {
@@ -48,12 +47,12 @@ namespace JewBot9K
             Settings.username = textBox1.Text.ToLower();
             Settings.oauth = textBox2.Text;
             Settings.isAuthorized = true;
-            SaveData(textBox1.Text, textBox2.Text);
+            SavePassword(textBox1.Text, textBox2.Text);
             Close();
         }
-        private void SaveData(string username, string password)
+        private void SavePassword(string username, string password)
         {
-            PasswordManipulation.SavePassword(username, password);
+            Settings.SavePassword(username, password);
             //to do tomorrow
         }
     }
