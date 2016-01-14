@@ -1,14 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-using ChatSharp;
-using System.Threading;
-using Newtonsoft.Json;
-using System.Net;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Diagnostics;
+﻿using ChatSharp;
 using JewBot9K.Utilities.Twitch;
+using Newtonsoft.Json;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace JewBot9K
 {
