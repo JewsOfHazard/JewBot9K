@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using ChatSharp;
-using JewBot9K.Utilities;
 using System.Threading;
 using Newtonsoft.Json;
 using System.Net;
 using System.Collections.Generic;
 using System.Drawing;
-using JewBot9K.Security;
 using System.Diagnostics;
 using JewBot9K.Utilities.Twitch;
 using RestSharp;
@@ -34,11 +32,11 @@ namespace JewBot9K
             client = new IrcClient("irc.twitch.tv", new IrcUser(Settings.username, Settings.username, Settings.oauth));
             client.ConnectionComplete += (s, e) => client.JoinChannel("#" + Settings.username);
             client.ConnectionComplete += (s, e) => Invoke((MethodInvoker)(() => label2.Text = "Connected"));
-            client.ConnectionComplete += (s, e) => Invoke((MethodInvoker)(() => label2.Location = new System.Drawing.Point(25,127)));
+            client.ConnectionComplete += (s, e) => Invoke((MethodInvoker)(() => label2.Location = new System.Drawing.Point(25, 127)));
 
             client.ChannelMessageRecieved += (s, e) => //holy shit the wrong spelling of received
             {
-                
+
                 //var channel = client.Channels[0];
                 string message = e.IrcMessage.RawMessage;
                 message = message.Substring(1);
@@ -74,10 +72,10 @@ namespace JewBot9K
                 foreach (string item in json.chatters.viewers)
                 {
                     ViewersList.Items.Add(item);
- 
+
                 }
             }
-            catch(Exception)
+            catch (Exception)
             { }
         }
 
@@ -89,7 +87,7 @@ namespace JewBot9K
                 {
                     updateViewers();
                 }
-                catch(WebException)
+                catch (WebException)
                 {
                     //The server failed to recieve a json from twitch for whatever reason
                 }
@@ -110,7 +108,14 @@ namespace JewBot9K
                 DisconnectButton.Enabled = true;
                 ConnectButton.Enabled = false;
                 Settings.isConnected = true;
+                SlowmodeToggle.Enabled = true;
+                if (Settings.isPartnered)
+                {
+                    RNineKToggle.Enabled = true;
+                    SubmodeToggle.Enabled = true;
+                }
                 runIrc();
+                ClearChat.Enabled = true;
             }
             else
             {
@@ -134,6 +139,10 @@ namespace JewBot9K
                 Settings.isConnected = false;
                 DisconnectButton.Enabled = false;
                 ConnectButton.Enabled = true;
+                ClearChat.Enabled = false;
+                RNineKToggle.Enabled = false;
+                SubmodeToggle.Enabled = false;
+                SlowmodeToggle.Enabled = false;
             }
             else
             {
@@ -169,13 +178,19 @@ namespace JewBot9K
             }
         }
 
+        private void sendMessageToIrc(string message)
+        {
+            IrcChannel channel = client.Channels[0];
+            channel.SendMessage(message);
+        }
+
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && Settings.isConnected)
             {
-                IrcChannel channel = client.Channels[0];
+
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);
-                channel.SendMessage(message);
+                sendMessageToIrc(message);
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
                 ChatBox.Clear();
             }
@@ -183,7 +198,7 @@ namespace JewBot9K
 
         private void VersionLabel_Click(object sender, EventArgs e)
         {
-           Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
+            Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
         }
 
         private void JewBot9K_FormClosed(object sender, FormClosedEventArgs e)
@@ -195,20 +210,38 @@ namespace JewBot9K
         {
             try
             {
-                string[] loginData = PasswordManipulation.GetPassword();
-                Settings.username = loginData[0].ToLower();
-                Settings.displayName = loginData[0];
-                Settings.oauth = loginData[1];
-                if (loginData[0] != "")
+                string[] loginData = Settings.LoadPasswordFromFile();
+                bool dataLoadedCorrectly = true;
+                foreach (string item in loginData)
                 {
+                    if (item == null || item == "")
+                    {
+                        dataLoadedCorrectly = false;
+                        break;
+                    }
+                }
+
+                if (dataLoadedCorrectly)
+                {
+                    Settings.username = loginData[0].ToLower();
+                    Settings.displayName = loginData[0];
+                    Settings.oauth = loginData[1];
                     Settings.isAuthorized = true;
                     connectIrc();
                 }
 
             }
+            catch (NullReferenceException)
+            {
+                //we just have not saved the file yet
+            }
             catch (IniParser.Exceptions.ParsingException)
             {
                 //do nothing, we just have not saved the file yet
+            }
+            catch (System.Security.Cryptography.CryptographicException)
+            {
+                ChatBox.Text = "There was an error loading your password, perhaps the data was corrupt or the ini version was old.";
             }
         }
 
@@ -223,7 +256,33 @@ namespace JewBot9K
         {
             loadPasswords();
             VersionNumber.Text = "Version: " + getVersion();
-            UpdateChannelTitleAndText();
+            if (Settings.isAuthorized)
+            {
+                UpdateChannelTitleAndText();
+                LoadPartnerInformation();
+            }
+            try
+            {
+                LoadDashboardSettings();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+        }
+
+        private async void LoadPartnerInformation()
+        {
+            User.Rootobject json;
+            using (WebClient wc = new WebClient())
+            {
+                json = JsonConvert.DeserializeObject<User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/channels/" + Settings.username));
+            }
+            Settings.slowMode = false;
+            Settings.subscriberMode = false;
+            Settings.r9kmode = false;
+            Settings.isPartnered = json.partnered;
         }
 
         private IRestResponse MakeTwitchRequest(Uri url, Method requestMethod, Dictionary<string, string> headers, Dictionary<string, string> parameters)
@@ -261,7 +320,6 @@ namespace JewBot9K
         {
             if (!Settings.isAuthorized && Settings.isConnected)
             {
-                
                 disconnectIrc();
             }
         }
@@ -274,6 +332,7 @@ namespace JewBot9K
                 CommercialPanel.BackColor = Color.LightGray;
                 CommercialCheckBox.BackColor = Color.LightGray;
                 Settings.commercialEnabled = true;
+                Settings.WriteDashboardToFile(true);
             }
             else if (!CommercialCheckBox.Checked)
             {
@@ -281,7 +340,18 @@ namespace JewBot9K
                 CommercialPanel.BackColor = Color.Gainsboro;
                 CommercialCheckBox.BackColor = Color.Gainsboro;
                 Settings.commercialEnabled = false;
+                Settings.WriteDashboardToFile(false);
+
             }
+        }
+
+        private void LoadDashboardSettings()
+        {
+
+            var settings = Settings.LoadDashboardFromFile();
+
+            CommercialPanel.Enabled = Convert.ToBoolean(settings[0]);
+            CommercialCheckBox.Checked = Convert.ToBoolean(settings[0]);
         }
 
         private async void UpdateChannelTitleAndText()
@@ -298,6 +368,105 @@ namespace JewBot9K
         private void RefreshChannel_Click(object sender, EventArgs e)
         {
             UpdateChannelTitleAndText();
+        }
+
+        private void runCommercial(int length)
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers["authorization"] = "OAuth " + Settings.oauth.Substring(6);
+            headers["content-type"] = "application/json";
+            headers["accept"] = "application/vnd.twitchtv.v2+json";
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters["length"] = length.ToString();
+
+            IRestResponse request = MakeTwitchRequest(
+                new Uri("https://api.twitch.tv/kraken/channels/" + Settings.username + "/commercial"),
+                Method.POST,
+                headers,
+                parameters);
+
+            if (request.StatusCode == HttpStatusCode.NoContent)
+            {
+                CommercialStatus.Text = "Success, Running Commercial (" + length + " Seconds)";
+            }
+            else if (Convert.ToInt32(request.StatusCode) == 422)
+            {
+                CommercialStatus.Text = "Commercial Not Allowed at this Time";
+            }
+        }
+
+        private void ThirtySecondsCommercial_Click(object sender, EventArgs e) { runCommercial(30); }
+
+        private void SixtySecondCommercial_Click(object sender, EventArgs e) { runCommercial(60); }
+
+        private void NinetySecondButton_Click(object sender, EventArgs e) { runCommercial(90); }
+
+        private void OneTwentyButton_Click(object sender, EventArgs e) { runCommercial(120); }
+
+        private void OneFiftyButton_Click(object sender, EventArgs e) { runCommercial(150); }
+
+        private void OneEightyButton_Click(object sender, EventArgs e) { runCommercial(180); }
+
+        private void ClearChat_Click(object sender, EventArgs e)
+        {
+            sendMessageToIrc("/clear");
+        }
+
+        private void SlowmodeToggle_Click(object sender, EventArgs e)
+        {
+
+            if (!Settings.slowMode)
+            {
+                Settings.slowMode = true;
+                SlowmodeToggle.Text = "Slowmode (On)";
+                sendMessageToIrc("/slow 180");
+            }
+            else
+            {
+                SlowmodeToggle.Text = "Slowmode (Off)";
+                Settings.slowMode = false;
+                sendMessageToIrc("/slowoff");
+            }
+
+        }
+
+        private void RNineKToggle_Click(object sender, EventArgs e)
+        {
+            if (Settings.isPartnered)
+            {
+                if (!Settings.r9kmode)
+                {
+                    RNineKToggle.Text = "R9K (On)";
+                    Settings.r9kmode = true;
+                    sendMessageToIrc("/r9kbeta");
+                }
+                else
+                {
+                    RNineKToggle.Text = "R9K (Off)";
+                    Settings.r9kmode = false;
+                    sendMessageToIrc("/r9kbetaoff");
+                }
+            }
+        }
+
+        private void SubmodeToggle_Click(object sender, EventArgs e)
+        {
+            if (Settings.isPartnered)
+            {
+                if (!Settings.subscriberMode)
+                {
+                    SubmodeToggle.Text = "On";
+                    Settings.subscriberMode = true;
+                    sendMessageToIrc("/subscribers");
+                }
+                else
+                {
+                    SubmodeToggle.Text = "Off";
+                    Settings.subscriberMode = false;
+                    sendMessageToIrc("/subscribersoff");
+                }
+            }
         }
     }
 }

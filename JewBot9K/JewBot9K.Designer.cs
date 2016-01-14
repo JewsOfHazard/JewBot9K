@@ -53,10 +53,23 @@
             this.GameUpdateBox = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
+            this.ThirtySecondsCommercial = new System.Windows.Forms.Button();
+            this.CommercialStatus = new System.Windows.Forms.Label();
+            this.SixtySecondCommercial = new System.Windows.Forms.Button();
+            this.NinetySecondButton = new System.Windows.Forms.Button();
+            this.OneTwentyButton = new System.Windows.Forms.Button();
+            this.OneFiftyButton = new System.Windows.Forms.Button();
+            this.OneEightyButton = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.ClearChat = new System.Windows.Forms.Button();
+            this.SlowmodeToggle = new System.Windows.Forms.Button();
+            this.RNineKToggle = new System.Windows.Forms.Button();
+            this.SubmodeToggle = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.CommercialPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -71,6 +84,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.SubmodeToggle);
+            this.tabPage1.Controls.Add(this.RNineKToggle);
+            this.tabPage1.Controls.Add(this.SlowmodeToggle);
+            this.tabPage1.Controls.Add(this.ClearChat);
             this.tabPage1.Controls.Add(this.DisconnectButton);
             this.tabPage1.Controls.Add(this.ChatWindow);
             this.tabPage1.Controls.Add(this.ChatBox);
@@ -124,9 +141,9 @@
             this.VersionNumber.AutoSize = true;
             this.VersionNumber.Location = new System.Drawing.Point(14, 323);
             this.VersionNumber.Name = "VersionNumber";
-            this.VersionNumber.Size = new System.Drawing.Size(78, 13);
+            this.VersionNumber.Size = new System.Drawing.Size(69, 13);
             this.VersionNumber.TabIndex = 6;
-            this.VersionNumber.Text = "Version 0.0.0.0";
+            this.VersionNumber.Text = "Version 0.0.0";
             this.VersionNumber.Click += new System.EventHandler(this.VersionLabel_Click);
             // 
             // ViewersList
@@ -193,6 +210,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.RefreshChannel);
             this.panel1.Controls.Add(this.CommercialCheckBox);
             this.panel1.Controls.Add(this.DashboardTitleLabel);
@@ -241,6 +259,13 @@
             // CommercialPanel
             // 
             this.CommercialPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.CommercialPanel.Controls.Add(this.OneEightyButton);
+            this.CommercialPanel.Controls.Add(this.OneFiftyButton);
+            this.CommercialPanel.Controls.Add(this.OneTwentyButton);
+            this.CommercialPanel.Controls.Add(this.NinetySecondButton);
+            this.CommercialPanel.Controls.Add(this.SixtySecondCommercial);
+            this.CommercialPanel.Controls.Add(this.CommercialStatus);
+            this.CommercialPanel.Controls.Add(this.ThirtySecondsCommercial);
             this.CommercialPanel.Location = new System.Drawing.Point(3, 53);
             this.CommercialPanel.Name = "CommercialPanel";
             this.CommercialPanel.Size = new System.Drawing.Size(663, 165);
@@ -293,6 +318,126 @@
             this.DisconnectTimer.Interval = 250;
             this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
             // 
+            // ThirtySecondsCommercial
+            // 
+            this.ThirtySecondsCommercial.Location = new System.Drawing.Point(7, 21);
+            this.ThirtySecondsCommercial.Name = "ThirtySecondsCommercial";
+            this.ThirtySecondsCommercial.Size = new System.Drawing.Size(100, 35);
+            this.ThirtySecondsCommercial.TabIndex = 0;
+            this.ThirtySecondsCommercial.Text = "30 Seconds";
+            this.ThirtySecondsCommercial.UseVisualStyleBackColor = true;
+            this.ThirtySecondsCommercial.Click += new System.EventHandler(this.ThirtySecondsCommercial_Click);
+            // 
+            // CommercialStatus
+            // 
+            this.CommercialStatus.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.CommercialStatus.Location = new System.Drawing.Point(227, 1);
+            this.CommercialStatus.Name = "CommercialStatus";
+            this.CommercialStatus.Size = new System.Drawing.Size(221, 23);
+            this.CommercialStatus.TabIndex = 1;
+            this.CommercialStatus.Text = "Not Running";
+            this.CommercialStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // SixtySecondCommercial
+            // 
+            this.SixtySecondCommercial.Location = new System.Drawing.Point(119, 21);
+            this.SixtySecondCommercial.Name = "SixtySecondCommercial";
+            this.SixtySecondCommercial.Size = new System.Drawing.Size(100, 35);
+            this.SixtySecondCommercial.TabIndex = 2;
+            this.SixtySecondCommercial.Text = "60 Seconds";
+            this.SixtySecondCommercial.UseVisualStyleBackColor = true;
+            this.SixtySecondCommercial.Click += new System.EventHandler(this.SixtySecondCommercial_Click);
+            // 
+            // NinetySecondButton
+            // 
+            this.NinetySecondButton.Location = new System.Drawing.Point(232, 21);
+            this.NinetySecondButton.Name = "NinetySecondButton";
+            this.NinetySecondButton.Size = new System.Drawing.Size(100, 35);
+            this.NinetySecondButton.TabIndex = 3;
+            this.NinetySecondButton.Text = "90 Seconds";
+            this.NinetySecondButton.UseVisualStyleBackColor = true;
+            this.NinetySecondButton.Click += new System.EventHandler(this.NinetySecondButton_Click);
+            // 
+            // OneTwentyButton
+            // 
+            this.OneTwentyButton.Location = new System.Drawing.Point(344, 21);
+            this.OneTwentyButton.Name = "OneTwentyButton";
+            this.OneTwentyButton.Size = new System.Drawing.Size(100, 35);
+            this.OneTwentyButton.TabIndex = 4;
+            this.OneTwentyButton.Text = "120 Seconds";
+            this.OneTwentyButton.UseVisualStyleBackColor = true;
+            this.OneTwentyButton.Click += new System.EventHandler(this.OneTwentyButton_Click);
+            // 
+            // OneFiftyButton
+            // 
+            this.OneFiftyButton.Location = new System.Drawing.Point(452, 21);
+            this.OneFiftyButton.Name = "OneFiftyButton";
+            this.OneFiftyButton.Size = new System.Drawing.Size(100, 35);
+            this.OneFiftyButton.TabIndex = 5;
+            this.OneFiftyButton.Text = "150 Seconds";
+            this.OneFiftyButton.UseVisualStyleBackColor = true;
+            this.OneFiftyButton.Click += new System.EventHandler(this.OneFiftyButton_Click);
+            // 
+            // OneEightyButton
+            // 
+            this.OneEightyButton.Location = new System.Drawing.Point(560, 21);
+            this.OneEightyButton.Name = "OneEightyButton";
+            this.OneEightyButton.Size = new System.Drawing.Size(100, 35);
+            this.OneEightyButton.TabIndex = 6;
+            this.OneEightyButton.Text = "180 Seconds";
+            this.OneEightyButton.UseVisualStyleBackColor = true;
+            this.OneEightyButton.Click += new System.EventHandler(this.OneEightyButton_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(3, 239);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(663, 196);
+            this.panel2.TabIndex = 8;
+            // 
+            // ClearChat
+            // 
+            this.ClearChat.Location = new System.Drawing.Point(10, 159);
+            this.ClearChat.Name = "ClearChat";
+            this.ClearChat.Size = new System.Drawing.Size(90, 30);
+            this.ClearChat.TabIndex = 10;
+            this.ClearChat.Text = "Clear Chat";
+            this.ClearChat.UseVisualStyleBackColor = true;
+            this.ClearChat.Click += new System.EventHandler(this.ClearChat_Click);
+            // 
+            // SlowmodeToggle
+            // 
+            this.SlowmodeToggle.Enabled = false;
+            this.SlowmodeToggle.Location = new System.Drawing.Point(10, 195);
+            this.SlowmodeToggle.Name = "SlowmodeToggle";
+            this.SlowmodeToggle.Size = new System.Drawing.Size(90, 34);
+            this.SlowmodeToggle.TabIndex = 11;
+            this.SlowmodeToggle.Text = "Slowmode";
+            this.SlowmodeToggle.UseVisualStyleBackColor = true;
+            this.SlowmodeToggle.Click += new System.EventHandler(this.SlowmodeToggle_Click);
+            // 
+            // RNineKToggle
+            // 
+            this.RNineKToggle.Enabled = false;
+            this.RNineKToggle.Location = new System.Drawing.Point(10, 235);
+            this.RNineKToggle.Name = "RNineKToggle";
+            this.RNineKToggle.Size = new System.Drawing.Size(90, 31);
+            this.RNineKToggle.TabIndex = 12;
+            this.RNineKToggle.Text = "R9K";
+            this.RNineKToggle.UseVisualStyleBackColor = true;
+            this.RNineKToggle.Click += new System.EventHandler(this.RNineKToggle_Click);
+            // 
+            // SubmodeToggle
+            // 
+            this.SubmodeToggle.Enabled = false;
+            this.SubmodeToggle.Location = new System.Drawing.Point(10, 272);
+            this.SubmodeToggle.Name = "SubmodeToggle";
+            this.SubmodeToggle.Size = new System.Drawing.Size(90, 39);
+            this.SubmodeToggle.TabIndex = 13;
+            this.SubmodeToggle.Text = "Submode";
+            this.SubmodeToggle.UseVisualStyleBackColor = true;
+            this.SubmodeToggle.Click += new System.EventHandler(this.SubmodeToggle_Click);
+            // 
             // JewBot9K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,6 +457,7 @@
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.CommercialPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -341,6 +487,18 @@
         private System.Windows.Forms.Panel CommercialPanel;
         private System.Windows.Forms.Button RefreshChannel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button ThirtySecondsCommercial;
+        private System.Windows.Forms.Label CommercialStatus;
+        private System.Windows.Forms.Button SixtySecondCommercial;
+        private System.Windows.Forms.Button NinetySecondButton;
+        private System.Windows.Forms.Button OneEightyButton;
+        private System.Windows.Forms.Button OneFiftyButton;
+        private System.Windows.Forms.Button OneTwentyButton;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button ClearChat;
+        private System.Windows.Forms.Button SubmodeToggle;
+        private System.Windows.Forms.Button RNineKToggle;
+        private System.Windows.Forms.Button SlowmodeToggle;
     }
 }
 
