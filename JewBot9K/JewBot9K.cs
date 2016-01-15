@@ -69,6 +69,7 @@ namespace JewBot9K
                     json = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync("https://tmi.twitch.tv/group/user/" + Settings.username + "/chatters"));
                 }
                 ViewersList.Items.Clear();
+                ViewerCountLabel.Text = "Viewers: " + json.chatter_count;
                 foreach (string item in json.chatters.viewers)
                 {
                     ViewersList.Items.Add(item);
@@ -190,7 +191,8 @@ namespace JewBot9K
             {
 
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);
-                sendMessageToIrc(message);
+                sendMessageToIrc(message);             
+
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
                 ChatBox.Clear();
             }
@@ -350,8 +352,18 @@ namespace JewBot9K
 
             var settings = Settings.LoadDashboardFromFile();
 
-            CommercialPanel.Enabled = Convert.ToBoolean(settings[0]);
-            CommercialCheckBox.Checked = Convert.ToBoolean(settings[0]);
+            bool commercialsEnabled = Convert.ToBoolean(settings[0]);
+            CommercialPanel.Enabled = commercialsEnabled;
+            CommercialCheckBox.Checked = commercialsEnabled;
+            if (!commercialsEnabled)
+            {
+                ThirtySecondsCommercial.Enabled = false;
+                SixtySecondCommercial.Enabled = false;
+                NinetySecondButton.Enabled = false;
+                OneTwentyButton.Enabled = false;
+                OneFiftyButton.Enabled = false;
+                OneEightyButton.Enabled = false;
+            }
         }
 
         private async void UpdateChannelTitleAndText()
@@ -467,6 +479,34 @@ namespace JewBot9K
                     sendMessageToIrc("/subscribersoff");
                 }
             }
+        }
+
+        private void ChatBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CommercialPanel_EnabledChanged(object sender, EventArgs e)
+        {
+            if (CommercialPanel.Enabled)
+            {
+                ThirtySecondsCommercial.Enabled = true;
+                SixtySecondCommercial.Enabled = true;
+                NinetySecondButton.Enabled = true;
+                OneTwentyButton.Enabled = true;
+                OneFiftyButton.Enabled = true;
+                OneEightyButton.Enabled = true;
+            }
+            else
+            {
+                ThirtySecondsCommercial.Enabled = false;
+                SixtySecondCommercial.Enabled = false;
+                NinetySecondButton.Enabled = false;
+                OneTwentyButton.Enabled = false;
+                OneFiftyButton.Enabled = false;
+                OneEightyButton.Enabled = false;
+            }
+
         }
     }
 }
