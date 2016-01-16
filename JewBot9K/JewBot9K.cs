@@ -181,8 +181,7 @@ namespace JewBot9K
 
         private void sendMessageToIrc(string message)
         {
-            IrcChannel channel = client.Channels[0];
-            channel.SendMessage(message);
+            client.SendMessage(message, client.Channels[0].Name);
         }
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
@@ -190,11 +189,27 @@ namespace JewBot9K
             if (e.KeyCode == Keys.Enter && Settings.isConnected)
             {
 
-                string message = ChatBox.Text.Replace("\r\n", string.Empty);
-                sendMessageToIrc(message);             
+                string message = ChatBox.Text.Replace("\r\n", string.Empty);        
 
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
                 ChatBox.Clear();
+
+
+                if (ChatBox.Text.StartsWith("/"))
+                {
+                    if (ChatBox.Text.StartsWith("/me"))
+                    {
+                        client.SendAction(ChatBox.Text.Substring(4), client.Channels[0].Name);
+                    }
+                    else
+                    {
+                        //action switch case here.. I lazy MAyne.
+                    }
+                }
+                else
+                {
+                    client.SendMessage(ChatBox.Text, client.Channels[0].Name);
+                }
             }
         }
 
