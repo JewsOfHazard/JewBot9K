@@ -16,14 +16,18 @@ namespace JewBot9K
         public static string username { get; set; }
         public static string oauth { get; set; }
         public static bool commercialEnabled { get; set; }
+        public static bool autoCommercialEnabled { get; set; }
         public static bool isPartnered { get; set; }
         public static bool subscriberMode { get; set; }
         public static bool slowMode { get; set; }
         public static bool r9kmode { get; set; }
+        public static int autoCommercialLength { get; set; }
+        
 
 
         private static byte[] salt = { 212, 22, 10, 73, 56, 166, 62, 245, 234, 90, 187, 130, 50, 174, 2, 250, 196, 182, 63, 175 };
         private static string settingsLocation = Application.StartupPath + "\\JewBot9KSettings.ini";
+
 
         public static void SavePassword(string username, string oauth, bool encrypt = true)
         {
@@ -92,8 +96,9 @@ namespace JewBot9K
 
             return new string[] { username, oauth };
         }
-        public static void WriteDashboardToFile(bool commercials)
+        public static void WriteDashboardToFile()
         {
+
             var parser = new FileIniDataParser();
             IniData data;
             try
@@ -107,12 +112,14 @@ namespace JewBot9K
 
             if (data.Sections.ContainsSection("DashboardSettings"))
             {
-                data["DashboardSettings"]["CommercialsEnabled"] = commercials.ToString();
+                data["DashboardSettings"]["CommercialsEnabled"] = commercialEnabled.ToString();
+                data["DashboardSettings"]["AutoCommercialsEnabled"] = autoCommercialEnabled.ToString();
             }
             else
             {
                 data.Sections.AddSection("DashboardSettings");
-                data["DashboardSettings"].AddKey("CommercialsEnabled", commercials.ToString());
+                data["DashboardSettings"].AddKey("CommercialsEnabled", commercialEnabled.ToString());
+                data["DashboardSettings"].AddKey("AutoCommercialsEnabled", autoCommercialEnabled.ToString()); 
             }
 
 
