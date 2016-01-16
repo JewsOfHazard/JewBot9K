@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using JewBot9K.Utilities;
-using System.Text;
 using System.IO;
 
 namespace JewBot9K
@@ -27,7 +25,7 @@ namespace JewBot9K
         {
             textBox1.Text = "";
             textBox2.Text = "";
-            File.Delete(Application.StartupPath + "\\JewBot9KSettings.ini");
+            Settings.logOut();
             Settings.displayName = null;
             Settings.username = null;
             Settings.oauth = null;

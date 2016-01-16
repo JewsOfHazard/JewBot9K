@@ -22,25 +22,40 @@ namespace JewBot9K
         public static bool slowMode { get; set; }
         public static bool r9kmode { get; set; }
         public static int autoCommercialLength { get; set; }
-        
 
 
+        private static FileIniDataParser parser = new FileIniDataParser();
         private static byte[] salt = { 212, 22, 10, 73, 56, 166, 62, 245, 234, 90, 187, 130, 50, 174, 2, 250, 196, 182, 63, 175 };
         private static string settingsLocation = Application.StartupPath + "\\JewBot9KSettings.ini";
 
 
-        public static void SavePassword(string username, string oauth, bool encrypt = true)
+        private static IniData GetIniData()
         {
-            var parser = new FileIniDataParser();
-            IniData data;
             try
             {
-                data = parser.ReadFile(settingsLocation);
+                return parser.ReadFile(settingsLocation);
             }
             catch (IniParser.Exceptions.ParsingException)
             {
-                data = new IniData();
+                return new IniData();
             }
+        }
+
+
+        public static void logOut()
+        {
+            IniData data = GetIniData();
+            if (data.Sections.ContainsSection("LoginInformation"))
+            {
+                data.Sections.RemoveSection("LoginInformation");
+            }
+            parser.WriteFile(settingsLocation, data);
+        }
+
+        public static void SavePassword(string username, string oauth, bool encrypt = true)
+        {
+
+            IniData data = GetIniData();
 
 
             if (encrypt)
@@ -68,16 +83,10 @@ namespace JewBot9K
         public static string[] LoadPasswordFromFile()
         {
 
-            var parser = new FileIniDataParser();
-            IniData data;
-            try
-            {
-                data = parser.ReadFile(settingsLocation);
-            }
-            catch (IniParser.Exceptions.ParsingException)
-            {
-                data = new IniData();
-            }
+
+            IniData data = GetIniData();
+
+
             string username = data["LoginInformation"]["Username"];
             string oauth = data["LoginInformation"]["OAuth"];
             bool encrypted = Convert.ToBoolean(data["LoginInformation"]["Encrypted"]);
@@ -99,16 +108,7 @@ namespace JewBot9K
         public static void WriteDashboardToFile()
         {
 
-            var parser = new FileIniDataParser();
-            IniData data;
-            try
-            {
-                data = parser.ReadFile(settingsLocation);
-            }
-            catch (IniParser.Exceptions.ParsingException)
-            {
-                data = new IniData();
-            }
+            IniData data = GetIniData();
 
             if (data.Sections.ContainsSection("DashboardSettings"))
             {
@@ -129,20 +129,12 @@ namespace JewBot9K
         public static object[] LoadDashboardFromFile()
         {
 
-            var parser = new FileIniDataParser();
-            IniData data;
-            try
-            {
-                data = parser.ReadFile(settingsLocation);
-            }
-            catch (IniParser.Exceptions.ParsingException)
-            {
-                data = new IniData();
-            }
+            IniData data = GetIniData();
 
-            bool commercialsEnabled = Convert.ToBoolean(data["DashboardSettings"]["CommercialsEnabled"]);
-
-            return new object[] { commercialsEnabled };
+            return new object[] {
+                data["DashboardSettings"]["CommercialsEnabled"],
+                data["DashboardSettings"]["AutoCommercialsEnabled"]
+            };
         }
 
     }

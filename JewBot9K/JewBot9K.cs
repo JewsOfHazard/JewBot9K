@@ -192,14 +192,22 @@ namespace JewBot9K
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);        
 
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
-                ChatBox.Clear();
 
 
-                if (ChatBox.Text.StartsWith("/"))
+                Console.WriteLine(message);
+                if (message.StartsWith("/"))
                 {
-                    if (ChatBox.Text.StartsWith("/me"))
+                    if (message.StartsWith("/me"))
                     {
-                        client.SendAction(ChatBox.Text.Substring(4), client.Channels[0].Name);
+                        try
+                        {
+                            client.SendAction(message.Substring(4), client.Channels[0].Name);
+                        } 
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            //This means they sent nothing after /me
+                        }
+                        
                     }
                     else
                     {
@@ -208,8 +216,9 @@ namespace JewBot9K
                 }
                 else
                 {
-                    client.SendMessage(ChatBox.Text, client.Channels[0].Name);
+                    client.SendMessage(message, client.Channels[0].Name);
                 }
+                ChatBox.Clear();
             }
         }
 
@@ -382,6 +391,9 @@ namespace JewBot9K
             var settings = Settings.LoadDashboardFromFile();
 
             bool commercialsEnabled = Convert.ToBoolean(settings[0]);
+            bool autoCommercialsEnabled = Convert.ToBoolean(settings[1]);
+
+            
             CommercialPanel.Enabled = commercialsEnabled;
             CommercialCheckBox.Checked = commercialsEnabled;
             if (!commercialsEnabled)
@@ -392,6 +404,8 @@ namespace JewBot9K
                 OneTwentyButton.Enabled = false;
                 OneFiftyButton.Enabled = false;
                 OneEightyButton.Enabled = false;
+                AutoCommercialCheck.Enabled = false;
+
             }
         }
 
