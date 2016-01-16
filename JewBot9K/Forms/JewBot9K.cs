@@ -207,7 +207,6 @@ namespace JewBot9K
                         {
                             //This means they sent nothing after /me
                         }
-                        
                     }
                     else
                     {
@@ -280,6 +279,8 @@ namespace JewBot9K
 
         private void JewBot9K_Load(object sender, EventArgs e)
         {
+
+            Commands.CommandParser.init();
             loadPasswords();
             VersionNumber.Text = "Version: " + getVersion();
             if (Settings.isAuthorized)
