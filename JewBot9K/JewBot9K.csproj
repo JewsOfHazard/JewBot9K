@@ -105,7 +105,7 @@
     <Compile Include="Commands\CLevel.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandParser.cs" />
-    <Compile Include="Commands\UserDetails.cs" />
+    <Compile Include="Twitch\UserDetails.cs" />
     <Compile Include="Forms\JewBot9K.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,7 +117,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Commands\Slap.cs" />
-    <Compile Include="Commands\TwitchChannel.cs" />
+    <Compile Include="Twitch\TwitchChannel.cs" />
     <Compile Include="Forms\UserInformation.cs">
       <SubType>Form</SubType>
     </Compile>
