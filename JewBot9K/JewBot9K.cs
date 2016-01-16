@@ -318,8 +318,6 @@ namespace JewBot9K
                 {
                     UpdateTitleStatus();
                 }
-
-
             }
         }
 
