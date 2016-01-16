@@ -17,7 +17,7 @@ namespace JewBot9K
 
         // "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=f9zg203ybd5xm8vzpl69nllx9d1amf1&redirect_uri=http://jewsofhazard.com/oauth&scope=user_read+user_blocks_read+user_blocks_edit+channel_editor+channel_commercial+channel_subscriptions+chat_login+channel_check_subscription";
 
-        private Dictionary<string, int[]> sessionUsers = new Dictionary<string, int[]>();
+        private Dictionary<string, double[]> sessionUsers = new Dictionary<string, double[]>();
         IrcClient client;
 
 
@@ -45,12 +45,12 @@ namespace JewBot9K
 
                 if (!sessionUsers.ContainsKey(user))
                 {
-                    sessionUsers.Add(user, new int[] { int.Parse(DateTime.Now.ToString("MMddHHmm")), 1 });
+                    sessionUsers.Add(user, new double[] { int.Parse(DateTime.Now.ToString("MMddHHmm")), 1 });
                     Console.WriteLine(sessionUsers[user].ToString());
                 }
                 else
                 {
-                    sessionUsers[user] = new int[] { sessionUsers[user][0], sessionUsers[user][1] + 1 };
+                    sessionUsers[user] = new double[] { sessionUsers[user][0], sessionUsers[user][1] + 1 };
                 }
 
                 Invoke((MethodInvoker)(() => ChatWindow.AppendText(user + ": " + message + "\n")));
@@ -172,7 +172,7 @@ namespace JewBot9K
                     }
                     catch (KeyNotFoundException)
                     {
-                        userinfo = new UserInformation(user.logo, user.display_name, int.Parse(DateTime.Now.ToString("MMddHHmm")), 0);
+                        userinfo = new UserInformation(user.logo, user.display_name, double.Parse(DateTime.Now.ToString("MMddHHmm")), 0);
                     }
                     userinfo.Show();
                 }
