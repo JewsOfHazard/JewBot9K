@@ -179,7 +179,7 @@ namespace JewBot9K
 
         private void VersionLabel_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://mega.nz/#F!bxoVxCBK!9SXCXc32PoUJbGxmNGoy5Q");
+            System.Diagnostics.Process.Start("https://github.com/JewsOfHazard/JewBot9K/releases");
         }
 
         private void JewBot9K_FormClosed(object sender, FormClosedEventArgs e)
