@@ -6,7 +6,7 @@ namespace JewBot9K
 {
     public partial class UserInformation : Form
     {
-        public UserInformation(string url, string username, int timeInChat, int messages)
+        public UserInformation(string url, string username, double timeInChat, double messages)
         {
             InitializeComponent();
 
@@ -23,11 +23,11 @@ namespace JewBot9K
             addInformationToTable(timeInChat, messages);
 
         }
-        private void addInformationToTable(int startTime, int messages)
+        private void addInformationToTable(double startTime, double messages)
         {
-            int timeInChat = (int.Parse(DateTime.Now.ToString("MMddHHmm")) - startTime);
-            int messagesPerMinute;
-            int messagesPerHour;
+            double timeInChat = (double.Parse(DateTime.Now.ToString("MMddHHmm")) - startTime);
+            double messagesPerMinute;
+            double messagesPerHour;
             try
             {
                 messagesPerMinute = messages / timeInChat;
