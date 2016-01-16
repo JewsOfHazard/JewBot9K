@@ -192,6 +192,7 @@
             this.Name = "JewBot9K";
             this.Text = "Hazard Bot";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JewBot9K_FormClosed);
+            this.Load += new System.EventHandler(this.JewBot9K_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

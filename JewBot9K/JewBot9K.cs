@@ -158,6 +158,22 @@ namespace JewBot9K
             if (e.KeyCode == Keys.Enter)
             {
                 //send irc message
+
+                if (textBox2.Text.StartsWith("/"))
+                {
+                    if (textBox2.Text.StartsWith("/me"))
+                    {
+                        client.SendAction(textBox2.Text.Substring(4), client.Channels[0].Name);
+                    }
+                    else
+                    {
+                        //action switch case here.. I lazy MAyne.
+                    }
+                }
+                else
+                {
+                    client.SendMessage(textBox2.Text, client.Channels[0].Name);
+                }
             }
         }
 
@@ -169,6 +185,11 @@ namespace JewBot9K
         private void JewBot9K_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void JewBot9K_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
