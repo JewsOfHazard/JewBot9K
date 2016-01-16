@@ -155,26 +155,7 @@ namespace JewBot9K
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                //send irc message
-
-                if (textBox2.Text.StartsWith("/"))
-                {
-                    if (textBox2.Text.StartsWith("/me"))
-                    {
-                        client.SendAction(textBox2.Text.Substring(4), client.Channels[0].Name);
-                    }
-                    else
-                    {
-                        //action switch case here.. I lazy MAyne.
-                    }
-                }
-                else
-                {
-                    client.SendMessage(textBox2.Text, client.Channels[0].Name);
-                }
-            }
+           
         }
 
         private void VersionLabel_Click(object sender, EventArgs e)
