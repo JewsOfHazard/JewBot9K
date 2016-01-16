@@ -164,7 +164,7 @@ namespace JewBot9K
             {
                 using (WebClient wc = new WebClient())
                 {
-                    Utilities.Twitch.User.Rootobject user = JsonConvert.DeserializeObject<User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/users/" + ViewersList.SelectedItem.ToString()));
+                    User.Rootobject user = JsonConvert.DeserializeObject<User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/users/" + ViewersList.SelectedItem.ToString()));
                     UserInformation userinfo;
                     try
                     {
