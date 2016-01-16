@@ -66,11 +66,20 @@
             this.GameUpdateBox = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
+            this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.AutoCommercialCheck = new System.Windows.Forms.CheckBox();
+            this.AutoCommercialLength = new System.Windows.Forms.NumericUpDown();
+            this.AutoCommercialPanel = new System.Windows.Forms.Panel();
+            this.CommercialLengthLabel = new System.Windows.Forms.Label();
+            this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
+            this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.CommercialPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
+            this.AutoCommercialPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -281,9 +290,9 @@
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(3, 239);
+            this.panel2.Location = new System.Drawing.Point(3, 289);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(663, 196);
+            this.panel2.Size = new System.Drawing.Size(663, 146);
             this.panel2.TabIndex = 8;
             // 
             // RefreshChannel
@@ -300,9 +309,10 @@
             // 
             this.CommercialCheckBox.AutoSize = true;
             this.CommercialCheckBox.BackColor = System.Drawing.Color.Gainsboro;
-            this.CommercialCheckBox.Location = new System.Drawing.Point(19, 45);
+            this.CommercialCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CommercialCheckBox.Location = new System.Drawing.Point(6, 47);
             this.CommercialCheckBox.Name = "CommercialCheckBox";
-            this.CommercialCheckBox.Size = new System.Drawing.Size(80, 17);
+            this.CommercialCheckBox.Size = new System.Drawing.Size(100, 21);
             this.CommercialCheckBox.TabIndex = 6;
             this.CommercialCheckBox.Text = "Commercial";
             this.CommercialCheckBox.UseVisualStyleBackColor = false;
@@ -321,6 +331,8 @@
             // CommercialPanel
             // 
             this.CommercialPanel.BackColor = System.Drawing.Color.Gainsboro;
+            this.CommercialPanel.Controls.Add(this.AutoCommercialCheck);
+            this.CommercialPanel.Controls.Add(this.AutoCommercialPanel);
             this.CommercialPanel.Controls.Add(this.OneEightyButton);
             this.CommercialPanel.Controls.Add(this.OneFiftyButton);
             this.CommercialPanel.Controls.Add(this.OneTwentyButton);
@@ -330,7 +342,7 @@
             this.CommercialPanel.Controls.Add(this.ThirtySecondsCommercial);
             this.CommercialPanel.Location = new System.Drawing.Point(3, 53);
             this.CommercialPanel.Name = "CommercialPanel";
-            this.CommercialPanel.Size = new System.Drawing.Size(663, 165);
+            this.CommercialPanel.Size = new System.Drawing.Size(663, 230);
             this.CommercialPanel.TabIndex = 7;
             this.CommercialPanel.EnabledChanged += new System.EventHandler(this.CommercialPanel_EnabledChanged);
             // 
@@ -387,9 +399,9 @@
             // CommercialStatus
             // 
             this.CommercialStatus.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.CommercialStatus.Location = new System.Drawing.Point(227, 1);
+            this.CommercialStatus.Location = new System.Drawing.Point(154, 1);
             this.CommercialStatus.Name = "CommercialStatus";
-            this.CommercialStatus.Size = new System.Drawing.Size(221, 23);
+            this.CommercialStatus.Size = new System.Drawing.Size(372, 23);
             this.CommercialStatus.TabIndex = 1;
             this.CommercialStatus.Text = "Not Running";
             this.CommercialStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -451,6 +463,77 @@
             this.DisconnectTimer.Interval = 250;
             this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
             // 
+            // TitleGameUpdateStatusTimer
+            // 
+            this.TitleGameUpdateStatusTimer.Interval = 1000;
+            this.TitleGameUpdateStatusTimer.Tick += new System.EventHandler(this.TitleGameUpdateStatusTimer_Tick);
+            // 
+            // AutoCommercialCheck
+            // 
+            this.AutoCommercialCheck.AutoSize = true;
+            this.AutoCommercialCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoCommercialCheck.Location = new System.Drawing.Point(3, 63);
+            this.AutoCommercialCheck.Name = "AutoCommercialCheck";
+            this.AutoCommercialCheck.Size = new System.Drawing.Size(133, 21);
+            this.AutoCommercialCheck.TabIndex = 7;
+            this.AutoCommercialCheck.Text = "Auto Commercial";
+            this.AutoCommercialCheck.UseVisualStyleBackColor = true;
+            this.AutoCommercialCheck.CheckedChanged += new System.EventHandler(this.AutoCommercialCheck_CheckedChanged);
+            // 
+            // AutoCommercialLength
+            // 
+            this.AutoCommercialLength.Increment = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Location = new System.Drawing.Point(111, 11);
+            this.AutoCommercialLength.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Name = "AutoCommercialLength";
+            this.AutoCommercialLength.Size = new System.Drawing.Size(74, 20);
+            this.AutoCommercialLength.TabIndex = 8;
+            this.AutoCommercialLength.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // AutoCommercialPanel
+            // 
+            this.AutoCommercialPanel.Controls.Add(this.CommercialLengthLabel);
+            this.AutoCommercialPanel.Controls.Add(this.AutoCommercialLength);
+            this.AutoCommercialPanel.Location = new System.Drawing.Point(5, 77);
+            this.AutoCommercialPanel.Name = "AutoCommercialPanel";
+            this.AutoCommercialPanel.Size = new System.Drawing.Size(653, 150);
+            this.AutoCommercialPanel.TabIndex = 9;
+            // 
+            // CommercialLengthLabel
+            // 
+            this.CommercialLengthLabel.AutoSize = true;
+            this.CommercialLengthLabel.Location = new System.Drawing.Point(13, 13);
+            this.CommercialLengthLabel.Name = "CommercialLengthLabel";
+            this.CommercialLengthLabel.Size = new System.Drawing.Size(94, 13);
+            this.CommercialLengthLabel.TabIndex = 9;
+            this.CommercialLengthLabel.Text = "Length (Seconds):";
+            // 
+            // CommercialLabelReset
+            // 
+            this.CommercialLabelReset.Interval = 3000;
+            this.CommercialLabelReset.Tick += new System.EventHandler(this.CommercialRunTimer_Tick);
+            // 
+            // AutoCommercialTimer
+            // 
+            this.AutoCommercialTimer.Interval = 1000;
+            // 
             // JewBot9K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +554,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.CommercialPanel.ResumeLayout(false);
+            this.CommercialPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).EndInit();
+            this.AutoCommercialPanel.ResumeLayout(false);
+            this.AutoCommercialPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -513,6 +600,13 @@
         private System.Windows.Forms.Button RNineKToggle;
         private System.Windows.Forms.Button SlowmodeToggle;
         private System.Windows.Forms.Label ViewerCountLabel;
+        private System.Windows.Forms.Timer TitleGameUpdateStatusTimer;
+        private System.Windows.Forms.CheckBox AutoCommercialCheck;
+        private System.Windows.Forms.NumericUpDown AutoCommercialLength;
+        private System.Windows.Forms.Panel AutoCommercialPanel;
+        private System.Windows.Forms.Label CommercialLengthLabel;
+        private System.Windows.Forms.Timer CommercialLabelReset;
+        private System.Windows.Forms.Timer AutoCommercialTimer;
     }
 }
 

@@ -314,8 +314,19 @@ namespace JewBot9K
                 parameters["channel[game]"] = GameUpdateBox.Text;
 
                 var request = MakeTwitchRequest(new Uri("https://api.twitch.tv/kraken/channels/" + Settings.username), Method.PUT, headers, parameters);
+                if(request.ResponseStatus == RestSharp.ResponseStatus.Completed)
+                {
+                    UpdateTitleStatus();
+                }
+
+
             }
-            //https://api.twitch.tv/kraken/channels/" + Settings.username
+        }
+
+        private void UpdateTitleStatus()
+        {
+            TitleGameUpdateButton.Text = "Success";
+            TitleGameUpdateStatusTimer.Enabled = true;
         }
 
         private void DisconnectTimer_Tick(object sender, EventArgs e)
@@ -330,11 +341,16 @@ namespace JewBot9K
         {
             if (CommercialCheckBox.Checked)
             {
-                CommercialPanel.Enabled = true;
-                CommercialPanel.BackColor = Color.LightGray;
-                CommercialCheckBox.BackColor = Color.LightGray;
-                Settings.commercialEnabled = true;
-                Settings.WriteDashboardToFile(true);
+                CommercialStatus.Text = "Your channel is not authorized to run commercials.";
+                CommercialCheckBox.Checked = false;
+                if (Settings.isPartnered)
+                {
+                    CommercialPanel.Enabled = true;
+                    CommercialPanel.BackColor = Color.LightGray;
+                    CommercialCheckBox.BackColor = Color.LightGray;
+                    Settings.commercialEnabled = true;
+                    Settings.WriteDashboardToFile();
+                }
             }
             else if (!CommercialCheckBox.Checked)
             {
@@ -342,7 +358,7 @@ namespace JewBot9K
                 CommercialPanel.BackColor = Color.Gainsboro;
                 CommercialCheckBox.BackColor = Color.Gainsboro;
                 Settings.commercialEnabled = false;
-                Settings.WriteDashboardToFile(false);
+                Settings.WriteDashboardToFile();
 
             }
         }
@@ -384,28 +400,34 @@ namespace JewBot9K
 
         private void runCommercial(int length)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers["authorization"] = "OAuth " + Settings.oauth.Substring(6);
-            headers["content-type"] = "application/json";
-            headers["accept"] = "application/vnd.twitchtv.v2+json";
-
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters["length"] = length.ToString();
-
-            IRestResponse request = MakeTwitchRequest(
-                new Uri("https://api.twitch.tv/kraken/channels/" + Settings.username + "/commercial"),
-                Method.POST,
-                headers,
-                parameters);
-
-            if (request.StatusCode == HttpStatusCode.NoContent)
+            if (Settings.isPartnered)
             {
-                CommercialStatus.Text = "Success, Running Commercial (" + length + " Seconds)";
+                Dictionary<string, string> headers = new Dictionary<string, string>();
+                headers["authorization"] = "OAuth " + Settings.oauth.Substring(6);
+                headers["content-type"] = "application/json";
+                headers["accept"] = "application/vnd.twitchtv.v2+json";
+
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                parameters["length"] = length.ToString();
+
+                IRestResponse request = MakeTwitchRequest(
+                    new Uri("https://api.twitch.tv/kraken/channels/" + Settings.username + "/commercial"),
+                    Method.POST,
+                    headers,
+                    parameters);
+
+                if (request.StatusCode == HttpStatusCode.NoContent)
+                {
+                    CommercialStatus.Text = "Success, Running Commercial (" + length + " Seconds)";
+                    CommercialLabelReset.Interval = length * 1000;
+                    CommercialLabelReset.Enabled = true;
+                }
+                else if (Convert.ToInt32(request.StatusCode) == 422)
+                {
+                    CommercialStatus.Text = "Commercial Not Allowed at this Time";
+                }
             }
-            else if (Convert.ToInt32(request.StatusCode) == 422)
-            {
-                CommercialStatus.Text = "Commercial Not Allowed at this Time";
-            }
+
         }
 
         private void ThirtySecondsCommercial_Click(object sender, EventArgs e) { runCommercial(30); }
@@ -507,6 +529,36 @@ namespace JewBot9K
                 OneEightyButton.Enabled = false;
             }
 
+        }
+
+        private void TitleGameUpdateStatusTimer_Tick(object sender, EventArgs e)
+        {
+            TitleGameUpdateButton.Text = "Update";
+            TitleGameUpdateStatusTimer.Enabled = false;
+        }
+
+        private void AutoCommercialCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AutoCommercialCheck.Checked && CommercialCheckBox.Checked && Settings.isAuthorized)
+            {
+
+                Settings.autoCommercialEnabled = true;
+                Settings.WriteDashboardToFile();
+                Settings.autoCommercialLength = Convert.ToInt32(AutoCommercialLength.Value);
+            }
+            else if (CommercialCheckBox.Checked)
+            {
+
+                Settings.autoCommercialEnabled = false;
+                Settings.WriteDashboardToFile();
+            }
+
+        }
+
+        private void CommercialRunTimer_Tick(object sender, EventArgs e)
+        {
+            CommercialStatus.Text = "Not Running";
+            CommercialLabelReset.Enabled = false;
         }
     }
 }
