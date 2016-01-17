@@ -21,7 +21,6 @@ namespace JewBot9K
         private Dictionary<string, double[]> sessionUsers = new Dictionary<string, double[]>();
         IrcClient client;
 
-
         public JewBot9K()
         {
             InitializeComponent();
@@ -57,18 +56,35 @@ namespace JewBot9K
                 {
                     sessionUsers[user] = new double[] { sessionUsers[user][0], sessionUsers[user][1] + 1 };
                 }
-                string[] splitMessage = message.Split(' ');
-                string[] parameters = new string[splitMessage.Length - 1];
-                if (splitMessage.Length > 1)
+                if (message.StartsWith("!"))
                 {
-                    for (int i = 1; i < splitMessage.Length ; i++)
+                    string[] splitMessage = message.Split(' ');
+                    string[] parameters = new string[splitMessage.Length - 1];
+                    if (splitMessage.Length > 1)
                     {
-                        parameters[i - 1] = splitMessage[i];
+                        for (int i = 1; i < splitMessage.Length; i++)
+                        {
+                            parameters[i - 1] = splitMessage[i];
+                        }
+                    }
+                    string sendMeToChannel;
+                    try
+                    {
+                        sendMeToChannel = CommandParser.parse(splitMessage[0].Substring(1), user, channel, parameters);
+                        if (sendMeToChannel != null)
+                        {
+                            sendMessageToIrc(sendMeToChannel);
+                        }
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        sendMessageToIrc($"I am sorry {user}, but the command \"{splitMessage[0].Substring(1)}\" is either not enabled or does not exist.");
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        sendMessageToIrc($"I am sorry {user} but you have used an inproper number of parameters for the command \"{splitMessage[0].Substring(1)}\".");
                     }
                 }
-
-                sendMessageToIrc(CommandParser.parse(splitMessage[0].Substring(1), user, channel, parameters));
-
 
                 Invoke((MethodInvoker)(() => ChatWindow.AppendText(user + ": " + message + "\n")));
             };
@@ -209,31 +225,10 @@ namespace JewBot9K
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);        
 
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
-
-
                 Console.WriteLine(message);
-                if (message.StartsWith("!"))
-                {
-                    if (message.StartsWith("/me"))
-                    {
-                        try
-                        {
-                            client.SendAction(message.Substring(4), client.Channels[0].Name);
-                        } 
-                        catch (ArgumentOutOfRangeException)
-                        {
-                            //This means they sent nothing after /me
-                        }
-                    }
-                    else
-                    {
-                        //action switch case here.. I lazy MAyne.
-                    }
-                }
-                else
-                {
-                    client.SendMessage(message, client.Channels[0].Name);
-                }
+
+                client.SendMessage(message, client.Channels[0].Name);
+                
                 ChatBox.Clear();
             }
         }

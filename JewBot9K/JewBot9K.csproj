@@ -95,6 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clear.cs" />
+    <Compile Include="Comeback.cs" />
+    <Compile Include="Fatality.cs" />
     <Compile Include="Fight.cs" />
     <Compile Include="Forms\AuthorizeForm.cs">
       <SubType>Form</SubType>
