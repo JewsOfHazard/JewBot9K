@@ -63,6 +63,36 @@ namespace JewBot9K.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1453049541_icon_128_document_scan {
+            get {
+                object obj = ResourceManager.GetObject("1453049541_icon-128-document-scan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1453049549_icon_55_document_text {
+            get {
+                object obj = ResourceManager.GetObject("1453049549_icon-55-document-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1453049553_icon_55_document_text {
+            get {
+                object obj = ResourceManager.GetObject("1453049553_icon-55-document-text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap avatar_3480_1420089908 {
             get {
                 object obj = ResourceManager.GetObject("avatar_3480_1420089908", resourceCulture);

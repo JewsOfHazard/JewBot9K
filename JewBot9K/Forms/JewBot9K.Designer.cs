@@ -53,6 +53,10 @@
             this.CommercialCheckBox = new System.Windows.Forms.CheckBox();
             this.DashboardTitleLabel = new System.Windows.Forms.Label();
             this.CommercialPanel = new System.Windows.Forms.Panel();
+            this.AutoCommercialCheck = new System.Windows.Forms.CheckBox();
+            this.AutoCommercialPanel = new System.Windows.Forms.Panel();
+            this.CommercialLengthLabel = new System.Windows.Forms.Label();
+            this.AutoCommercialLength = new System.Windows.Forms.NumericUpDown();
             this.OneEightyButton = new System.Windows.Forms.Button();
             this.OneFiftyButton = new System.Windows.Forms.Button();
             this.OneTwentyButton = new System.Windows.Forms.Button();
@@ -67,25 +71,34 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
-            this.AutoCommercialCheck = new System.Windows.Forms.CheckBox();
-            this.AutoCommercialLength = new System.Windows.Forms.NumericUpDown();
-            this.AutoCommercialPanel = new System.Windows.Forms.Panel();
-            this.CommercialLengthLabel = new System.Windows.Forms.Label();
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.CommercialPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
             this.AutoCommercialPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -346,6 +359,63 @@
             this.CommercialPanel.TabIndex = 7;
             this.CommercialPanel.EnabledChanged += new System.EventHandler(this.CommercialPanel_EnabledChanged);
             // 
+            // AutoCommercialCheck
+            // 
+            this.AutoCommercialCheck.AutoSize = true;
+            this.AutoCommercialCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoCommercialCheck.Location = new System.Drawing.Point(3, 63);
+            this.AutoCommercialCheck.Name = "AutoCommercialCheck";
+            this.AutoCommercialCheck.Size = new System.Drawing.Size(133, 21);
+            this.AutoCommercialCheck.TabIndex = 7;
+            this.AutoCommercialCheck.Text = "Auto Commercial";
+            this.AutoCommercialCheck.UseVisualStyleBackColor = true;
+            this.AutoCommercialCheck.CheckedChanged += new System.EventHandler(this.AutoCommercialCheck_CheckedChanged);
+            // 
+            // AutoCommercialPanel
+            // 
+            this.AutoCommercialPanel.Controls.Add(this.CommercialLengthLabel);
+            this.AutoCommercialPanel.Controls.Add(this.AutoCommercialLength);
+            this.AutoCommercialPanel.Location = new System.Drawing.Point(5, 77);
+            this.AutoCommercialPanel.Name = "AutoCommercialPanel";
+            this.AutoCommercialPanel.Size = new System.Drawing.Size(653, 150);
+            this.AutoCommercialPanel.TabIndex = 9;
+            // 
+            // CommercialLengthLabel
+            // 
+            this.CommercialLengthLabel.AutoSize = true;
+            this.CommercialLengthLabel.Location = new System.Drawing.Point(13, 13);
+            this.CommercialLengthLabel.Name = "CommercialLengthLabel";
+            this.CommercialLengthLabel.Size = new System.Drawing.Size(94, 13);
+            this.CommercialLengthLabel.TabIndex = 9;
+            this.CommercialLengthLabel.Text = "Length (Seconds):";
+            // 
+            // AutoCommercialLength
+            // 
+            this.AutoCommercialLength.Increment = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Location = new System.Drawing.Point(111, 11);
+            this.AutoCommercialLength.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.AutoCommercialLength.Name = "AutoCommercialLength";
+            this.AutoCommercialLength.Size = new System.Drawing.Size(74, 20);
+            this.AutoCommercialLength.TabIndex = 8;
+            this.AutoCommercialLength.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
             // OneEightyButton
             // 
             this.OneEightyButton.Location = new System.Drawing.Point(560, 21);
@@ -468,63 +538,6 @@
             this.TitleGameUpdateStatusTimer.Interval = 1000;
             this.TitleGameUpdateStatusTimer.Tick += new System.EventHandler(this.TitleGameUpdateStatusTimer_Tick);
             // 
-            // AutoCommercialCheck
-            // 
-            this.AutoCommercialCheck.AutoSize = true;
-            this.AutoCommercialCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoCommercialCheck.Location = new System.Drawing.Point(3, 63);
-            this.AutoCommercialCheck.Name = "AutoCommercialCheck";
-            this.AutoCommercialCheck.Size = new System.Drawing.Size(133, 21);
-            this.AutoCommercialCheck.TabIndex = 7;
-            this.AutoCommercialCheck.Text = "Auto Commercial";
-            this.AutoCommercialCheck.UseVisualStyleBackColor = true;
-            this.AutoCommercialCheck.CheckedChanged += new System.EventHandler(this.AutoCommercialCheck_CheckedChanged);
-            // 
-            // AutoCommercialLength
-            // 
-            this.AutoCommercialLength.Increment = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.AutoCommercialLength.Location = new System.Drawing.Point(111, 11);
-            this.AutoCommercialLength.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.AutoCommercialLength.Minimum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.AutoCommercialLength.Name = "AutoCommercialLength";
-            this.AutoCommercialLength.Size = new System.Drawing.Size(74, 20);
-            this.AutoCommercialLength.TabIndex = 8;
-            this.AutoCommercialLength.Value = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            // 
-            // AutoCommercialPanel
-            // 
-            this.AutoCommercialPanel.Controls.Add(this.CommercialLengthLabel);
-            this.AutoCommercialPanel.Controls.Add(this.AutoCommercialLength);
-            this.AutoCommercialPanel.Location = new System.Drawing.Point(5, 77);
-            this.AutoCommercialPanel.Name = "AutoCommercialPanel";
-            this.AutoCommercialPanel.Size = new System.Drawing.Size(653, 150);
-            this.AutoCommercialPanel.TabIndex = 9;
-            // 
-            // CommercialLengthLabel
-            // 
-            this.CommercialLengthLabel.AutoSize = true;
-            this.CommercialLengthLabel.Location = new System.Drawing.Point(13, 13);
-            this.CommercialLengthLabel.Name = "CommercialLengthLabel";
-            this.CommercialLengthLabel.Size = new System.Drawing.Size(94, 13);
-            this.CommercialLengthLabel.TabIndex = 9;
-            this.CommercialLengthLabel.Text = "Length (Seconds):";
-            // 
             // CommercialLabelReset
             // 
             this.CommercialLabelReset.Interval = 3000;
@@ -533,6 +546,102 @@
             // AutoCommercialTimer
             // 
             this.AutoCommercialTimer.Interval = 1000;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.toolStrip1);
+            this.tabPage3.Controls.Add(this.panel3);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.pictureBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(683, 351);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Plugins";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 137);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 211);
+            this.textBox1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(334, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(144, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Available Plugins";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(168, 31);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(509, 289);
+            this.panel3.TabIndex = 3;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3});
+            this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStrip1.Location = new System.Drawing.Point(168, 323);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip1.Size = new System.Drawing.Size(509, 22);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripButton1.Image = global::JewBot9K.Properties.Resources._1453049541_icon_128_document_scan;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(52, 20);
+            this.toolStripButton1.Text = "Scan";
+            this.toolStripButton1.ToolTipText = "Scan for all new plugins available.";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.Image = global::JewBot9K.Properties.Resources._1453049549_icon_55_document_text;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(79, 20);
+            this.toolStripButton2.Text = "Enable All";
+            this.toolStripButton2.ToolTipText = "Enable All of the available plugins listed above.";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.Image = global::JewBot9K.Properties.Resources._1453049553_icon_55_document_text;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(82, 20);
+            this.toolStripButton3.Text = "Disable All";
+            this.toolStripButton3.ToolTipText = "Disable all plugins listed above.";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(155, 124);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // JewBot9K
             // 
@@ -555,9 +664,14 @@
             this.panel1.PerformLayout();
             this.CommercialPanel.ResumeLayout(false);
             this.CommercialPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).EndInit();
             this.AutoCommercialPanel.ResumeLayout(false);
             this.AutoCommercialPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -607,6 +721,15 @@
         private System.Windows.Forms.Label CommercialLengthLabel;
         private System.Windows.Forms.Timer CommercialLabelReset;
         private System.Windows.Forms.Timer AutoCommercialTimer;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
