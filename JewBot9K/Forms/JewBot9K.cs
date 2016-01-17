@@ -61,13 +61,13 @@ namespace JewBot9K
                 string[] parameters = new string[splitMessage.Length - 1];
                 if (splitMessage.Length > 1)
                 {
-                    for (int i = 1; i < splitMessage.Length - 1; i++)
+                    for (int i = 1; i < splitMessage.Length ; i++)
                     {
                         parameters[i - 1] = splitMessage[i];
                     }
                 }
 
-                CommandParser.parse(splitMessage[0], user, channel, parameters);
+                sendMessageToIrc(CommandParser.parse(splitMessage[0].Substring(1), user, channel, parameters));
 
 
                 Invoke((MethodInvoker)(() => ChatWindow.AppendText(user + ": " + message + "\n")));
