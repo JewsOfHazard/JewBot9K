@@ -101,7 +101,7 @@
     <Compile Include="Forms\AuthorizeForm.Designer.cs">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Commands\ChatCommands.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\CLevel.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandParser.cs" />

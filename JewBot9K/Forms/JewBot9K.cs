@@ -1,4 +1,5 @@
 ﻿using ChatSharp;
+using JewBot9K.Commands;
 using JewBot9K.Utilities.Twitch;
 using Newtonsoft.Json;
 using RestSharp;
@@ -38,10 +39,14 @@ namespace JewBot9K
             {
 
                 //var channel = client.Channels[0];
+                
                 string message = e.IrcMessage.RawMessage;
-                message = message.Substring(1);
-                string user = message.Substring(0, message.IndexOf("!"));
-                message = message.Substring(message.IndexOf(":") + 1);
+                message = message.Substring(1); //this removes the initial ! so that we can get the user properly
+                string channel = message.Substring(message.IndexOf("#")).Split(' ')[0];
+                string user = message.Substring(0, message.IndexOf("!")); //this is in the raw message and will always occur before a command
+                message = message.Substring(message.IndexOf(":") + 1); //this is what the message is by itself
+                
+
 
                 if (!sessionUsers.ContainsKey(user))
                 {
@@ -52,6 +57,18 @@ namespace JewBot9K
                 {
                     sessionUsers[user] = new double[] { sessionUsers[user][0], sessionUsers[user][1] + 1 };
                 }
+                string[] splitMessage = message.Split(' ');
+                string[] parameters = new string[splitMessage.Length - 1];
+                if (splitMessage.Length > 1)
+                {
+                    for (int i = 1; i < splitMessage.Length - 1; i++)
+                    {
+                        parameters[i - 1] = splitMessage[i];
+                    }
+                }
+
+                CommandParser.parse(splitMessage[0], user, channel, parameters);
+
 
                 Invoke((MethodInvoker)(() => ChatWindow.AppendText(user + ": " + message + "\n")));
             };
@@ -61,7 +78,7 @@ namespace JewBot9K
 
         private async void updateViewers()
         {
-            Utilities.Twitch.LiveViewers.Rootobject json;
+            LiveViewers.Rootobject json;
             try
             {
                 using (WebClient wc = new WebClient())
@@ -181,7 +198,7 @@ namespace JewBot9K
 
         private void sendMessageToIrc(string message)
         {
-            client.SendMessage(message, client.Channels[0].Name);
+            client.SendAction(message, client.Channels[0].Name);
         }
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
@@ -195,7 +212,7 @@ namespace JewBot9K
 
 
                 Console.WriteLine(message);
-                if (message.StartsWith("/"))
+                if (message.StartsWith("!"))
                 {
                     if (message.StartsWith("/me"))
                     {
@@ -280,7 +297,7 @@ namespace JewBot9K
         private void JewBot9K_Load(object sender, EventArgs e)
         {
 
-            Commands.CommandParser.init();
+            CommandParser.init();
             loadPasswords();
             VersionNumber.Text = "Version: " + getVersion();
             if (Settings.isAuthorized)

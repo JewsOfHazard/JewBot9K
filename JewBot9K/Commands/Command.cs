@@ -1,6 +1,6 @@
 ﻿namespace JewBot9K.Commands
 {
-    public abstract class Command
+    public abstract class Command : ICommand
     {
 
         /**

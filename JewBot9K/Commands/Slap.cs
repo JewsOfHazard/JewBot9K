@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JewBot9K.Commands
 {
@@ -12,7 +8,8 @@ namespace JewBot9K.Commands
 
         public string execute(string channel, string sender, string[] parameters)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("What is this shit");
+            return $"{sender} slaps {parameters[0]} in the face really hard.";
         }
 
         public CLevel getCommandLevel()
