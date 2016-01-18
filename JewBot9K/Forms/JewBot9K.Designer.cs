@@ -49,6 +49,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.FollowerAnnounceText = new System.Windows.Forms.TextBox();
+            this.AnnounceFollowers = new System.Windows.Forms.CheckBox();
+            this.SessionFollowersLabel = new System.Windows.Forms.Label();
             this.RefreshChannel = new System.Windows.Forms.Button();
             this.CommercialCheckBox = new System.Windows.Forms.CheckBox();
             this.DashboardTitleLabel = new System.Windows.Forms.Label();
@@ -77,13 +80,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.UpdateViewsandFollows = new System.Windows.Forms.Timer(this.components);
             this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
-            this.SessionFollowersTextbox = new System.Windows.Forms.TextBox();
-            this.SessionFollowersLabel = new System.Windows.Forms.Label();
+            this.SessionFollowersList = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -306,12 +308,43 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.SessionFollowersList);
+            this.panel2.Controls.Add(this.FollowerAnnounceText);
+            this.panel2.Controls.Add(this.AnnounceFollowers);
             this.panel2.Controls.Add(this.SessionFollowersLabel);
-            this.panel2.Controls.Add(this.SessionFollowersTextbox);
             this.panel2.Location = new System.Drawing.Point(3, 289);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(663, 303);
             this.panel2.TabIndex = 8;
+            // 
+            // FollowerAnnounceText
+            // 
+            this.FollowerAnnounceText.Location = new System.Drawing.Point(311, 51);
+            this.FollowerAnnounceText.Name = "FollowerAnnounceText";
+            this.FollowerAnnounceText.Size = new System.Drawing.Size(347, 20);
+            this.FollowerAnnounceText.TabIndex = 3;
+            this.FollowerAnnounceText.Text = "Thank you {user} for following the stream!";
+            // 
+            // AnnounceFollowers
+            // 
+            this.AnnounceFollowers.AutoSize = true;
+            this.AnnounceFollowers.Location = new System.Drawing.Point(311, 27);
+            this.AnnounceFollowers.Name = "AnnounceFollowers";
+            this.AnnounceFollowers.Size = new System.Drawing.Size(125, 17);
+            this.AnnounceFollowers.TabIndex = 2;
+            this.AnnounceFollowers.Text = "Announce Followers:";
+            this.AnnounceFollowers.UseVisualStyleBackColor = true;
+            this.AnnounceFollowers.CheckedChanged += new System.EventHandler(this.AnnounceFollowers_CheckedChanged);
+            // 
+            // SessionFollowersLabel
+            // 
+            this.SessionFollowersLabel.AutoSize = true;
+            this.SessionFollowersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SessionFollowersLabel.Location = new System.Drawing.Point(5, 4);
+            this.SessionFollowersLabel.Name = "SessionFollowersLabel";
+            this.SessionFollowersLabel.Size = new System.Drawing.Size(121, 17);
+            this.SessionFollowersLabel.TabIndex = 1;
+            this.SessionFollowersLabel.Text = "Session Followers";
             // 
             // RefreshChannel
             // 
@@ -622,11 +655,11 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // timer1
+            // UpdateViewsandFollows
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 15000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.UpdateViewsandFollows.Enabled = true;
+            this.UpdateViewsandFollows.Interval = 15000;
+            this.UpdateViewsandFollows.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // DisconnectTimer
             // 
@@ -648,25 +681,14 @@
             // 
             this.AutoCommercialTimer.Interval = 1000;
             // 
-            // SessionFollowersTextbox
+            // SessionFollowersList
             // 
-            this.SessionFollowersTextbox.Location = new System.Drawing.Point(3, 25);
-            this.SessionFollowersTextbox.Multiline = true;
-            this.SessionFollowersTextbox.Name = "SessionFollowersTextbox";
-            this.SessionFollowersTextbox.ReadOnly = true;
-            this.SessionFollowersTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SessionFollowersTextbox.Size = new System.Drawing.Size(302, 156);
-            this.SessionFollowersTextbox.TabIndex = 0;
-            // 
-            // SessionFollowersLabel
-            // 
-            this.SessionFollowersLabel.AutoSize = true;
-            this.SessionFollowersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SessionFollowersLabel.Location = new System.Drawing.Point(5, 4);
-            this.SessionFollowersLabel.Name = "SessionFollowersLabel";
-            this.SessionFollowersLabel.Size = new System.Drawing.Size(121, 17);
-            this.SessionFollowersLabel.TabIndex = 1;
-            this.SessionFollowersLabel.Text = "Session Followers";
+            this.SessionFollowersList.FormattingEnabled = true;
+            this.SessionFollowersList.Location = new System.Drawing.Point(8, 24);
+            this.SessionFollowersList.Name = "SessionFollowersList";
+            this.SessionFollowersList.Size = new System.Drawing.Size(299, 160);
+            this.SessionFollowersList.TabIndex = 4;
+            this.SessionFollowersList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SessionFollowersList_MouseDoubleClick);
             // 
             // JewBot9K
             // 
@@ -715,7 +737,7 @@
         private System.Windows.Forms.TextBox ChatBox;
         private System.Windows.Forms.Label VersionNumber;
         private System.Windows.Forms.ListBox ViewersList;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer UpdateViewsandFollows;
         private System.Windows.Forms.TextBox ChatWindow;
         private System.Windows.Forms.Button DisconnectButton;
         private System.Windows.Forms.Label DashboardGameUpdateLabel;
@@ -758,7 +780,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label SessionFollowersLabel;
-        private System.Windows.Forms.TextBox SessionFollowersTextbox;
+        private System.Windows.Forms.TextBox FollowerAnnounceText;
+        private System.Windows.Forms.CheckBox AnnounceFollowers;
+        private System.Windows.Forms.ListBox SessionFollowersList;
     }
 }
 

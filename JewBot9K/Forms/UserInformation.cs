@@ -28,16 +28,16 @@ namespace JewBot9K
             double timeInChat = (double.Parse(DateTime.Now.ToString("MMddHHmm")) - startTime);
             double messagesPerMinute;
             double messagesPerHour;
-            try
+
+            messagesPerMinute = messages / timeInChat;
+            messagesPerHour = messages / timeInChat * 60;
+
+            if (messagesPerHour == 1D / 0D || messagesPerMinute == 1D / 0D)
             {
-                messagesPerMinute = messages / timeInChat;
-                messagesPerHour = messages / timeInChat * 60;
+                messagesPerMinute = messages;
+                messagesPerHour = messages;
             }
-            catch (DivideByZeroException)
-            {
-                messagesPerMinute = 0;
-                messagesPerHour = 0;
-            }
+
             if (timeInChat <= 60)
             {
                 label2.Text = "Time in chat: " + timeInChat + " minutes.";
