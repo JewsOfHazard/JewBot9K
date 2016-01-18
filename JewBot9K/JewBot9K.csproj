@@ -95,10 +95,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clear.cs" />
-    <Compile Include="Comeback.cs" />
-    <Compile Include="Fatality.cs" />
-    <Compile Include="Fight.cs" />
+    <Compile Include="Commands\Clear.cs" />
+    <Compile Include="Commands\Comeback.cs" />
+    <Compile Include="Commands\Fatality.cs" />
+    <Compile Include="Commands\Fight.cs" />
     <Compile Include="Follows.cs" />
     <Compile Include="Forms\AuthorizeForm.cs">
       <SubType>Form</SubType>

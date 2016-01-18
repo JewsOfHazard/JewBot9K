@@ -106,15 +106,6 @@ namespace JewBot9K
                     followsJson = JsonConvert.DeserializeObject<Follows.Rootobject>(await wc.DownloadStringTaskAsync($"https://api.twitch.tv/kraken/channels/{Settings.username}/follows"));
                 }
 
-                Follows.Follow[] followArray = followsJson.follows;
-                foreach (Follows.Follow person in followArray)
-                {
-                    if (person.created_at > sessionStart && !sessionFollowers.Contains(person.user.display_name))
-                    {
-                        SessionFollowersTextbox.AppendText($"{person.user.display_name} \n");
-                        sessionFollowers.Add(person.user.display_name);
-                    }
-                }
 
                 ViewersList.Items.Clear();
                 ViewerCountLabel.Text = "Viewers: " + viewersJson.chatter_count;
@@ -128,6 +119,39 @@ namespace JewBot9K
             { }
         }
 
+        private async void updateLatestFollowers()
+        {
+            Follows.Rootobject followsJson;
+            using (WebClient wc = new WebClient())
+            {
+                
+                followsJson = JsonConvert.DeserializeObject<Follows.Rootobject>(await wc.DownloadStringTaskAsync($"https://api.twitch.tv/kraken/channels/{Settings.username}/follows"));
+            }
+
+            Follows.Follow[] followArray = followsJson.follows;
+            foreach (Follows.Follow person in followArray)
+            {
+                if (person.created_at > sessionStart && !sessionFollowers.Contains(person.user.display_name)) // aka new follower
+                {
+                    SessionFollowersList.Items.Add(person.user.display_name);
+                    sessionFollowers.Add(person.user.display_name);
+
+                    if (AnnounceFollowers.Checked)
+                    {
+                        string temp = FollowerAnnounceText.Text;
+                        try
+                        {
+                            sendMessageToIrc(temp.Replace("{user}", person.user.display_name));
+                        }
+                        catch
+                        {
+                            sendMessageToIrc(temp);
+                        }
+                    }
+                }
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Settings.isAuthorized)
@@ -135,6 +159,7 @@ namespace JewBot9K
                 try
                 {
                     updateViewers();
+                    updateLatestFollowers();
                 }
                 catch (WebException)
                 {
@@ -229,7 +254,7 @@ namespace JewBot9K
 
         private void sendMessageToIrc(string message)
         {
-            client.SendAction(message, client.Channels[0].Name);
+            client.SendMessage(message, client.Channels[0].Name);
         }
 
         private void ChatBox_KeyDown(object sender, KeyEventArgs e)
@@ -323,7 +348,7 @@ namespace JewBot9K
             {
                 Console.WriteLine(ex);
             }
-            sessionStart = DateTime.Now;
+            sessionStart = DateTime.UtcNow;
 
         }
 
@@ -489,7 +514,7 @@ namespace JewBot9K
         private void ThirtySecondsCommercial_Click(object sender, EventArgs e) { runCommercial(30); }
 
         private void SixtySecondCommercial_Click(object sender, EventArgs e) { runCommercial(60); }
-
+        
         private void NinetySecondButton_Click(object sender, EventArgs e) { runCommercial(90); }
 
         private void OneTwentyButton_Click(object sender, EventArgs e) { runCommercial(120); }
@@ -615,6 +640,40 @@ namespace JewBot9K
         {
             CommercialStatus.Text = "Not Running";
             CommercialLabelReset.Enabled = false;
+        }
+
+        private void AnnounceFollowers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AnnounceFollowers.Checked)
+            {
+                FollowerAnnounceText.Enabled = true;
+            }
+            else
+            {
+                FollowerAnnounceText.Enabled = false;
+            }
+        }
+
+        private async void SessionFollowersList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            if (SessionFollowersList.SelectedItem != null)
+            {
+                using (WebClient wc = new WebClient())
+                {
+                    User.Rootobject user = JsonConvert.DeserializeObject<User.Rootobject>(await wc.DownloadStringTaskAsync("https://api.twitch.tv/kraken/users/" + SessionFollowersList.SelectedItem.ToString()));
+                    UserInformation userinfo;
+                    try
+                    {
+                        userinfo = new UserInformation(user.logo, user.display_name, sessionUsers[user.name][0], sessionUsers[user.name][1]);
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        userinfo = new UserInformation(user.logo, user.display_name, double.Parse(DateTime.Now.ToString("MMddHHmm")), 0);
+                    }
+                    userinfo.Show();
+                }
+            }
         }
     }
 }
