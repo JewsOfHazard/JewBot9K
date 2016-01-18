@@ -72,6 +72,11 @@
             this.TitleGameUpdateButton = new System.Windows.Forms.Button();
             this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
             this.GameUpdateBox = new System.Windows.Forms.TextBox();
+            this.Points = new System.Windows.Forms.TabPage();
+            this.PointsCheckBox = new System.Windows.Forms.CheckBox();
+            this.PointsMainPanel = new System.Windows.Forms.Panel();
+            this.PointsNameBox = new System.Windows.Forms.TextBox();
+            this.PointsLabel = new System.Windows.Forms.Label();
             this.Plugins = new System.Windows.Forms.TabPage();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -86,11 +91,6 @@
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
-            this.Points = new System.Windows.Forms.TabPage();
-            this.PointsMainPanel = new System.Windows.Forms.Panel();
-            this.PointsLabel = new System.Windows.Forms.Label();
-            this.PointsNameBox = new System.Windows.Forms.TextBox();
-            this.PointsCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.Chat.SuspendLayout();
             this.Dashboard.SuspendLayout();
@@ -99,11 +99,11 @@
             this.CommercialPanel.SuspendLayout();
             this.AutoCommercialPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
+            this.Points.SuspendLayout();
+            this.PointsMainPanel.SuspendLayout();
             this.Plugins.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.Points.SuspendLayout();
-            this.PointsMainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -578,6 +578,54 @@
             this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
             this.GameUpdateBox.TabIndex = 1;
             // 
+            // Points
+            // 
+            this.Points.Controls.Add(this.PointsCheckBox);
+            this.Points.Controls.Add(this.PointsMainPanel);
+            this.Points.Location = new System.Drawing.Point(4, 22);
+            this.Points.Name = "Points";
+            this.Points.Size = new System.Drawing.Size(683, 351);
+            this.Points.TabIndex = 3;
+            this.Points.Text = "Points";
+            this.Points.UseVisualStyleBackColor = true;
+            // 
+            // PointsCheckBox
+            // 
+            this.PointsCheckBox.AutoSize = true;
+            this.PointsCheckBox.Location = new System.Drawing.Point(6, 6);
+            this.PointsCheckBox.Name = "PointsCheckBox";
+            this.PointsCheckBox.Size = new System.Drawing.Size(65, 17);
+            this.PointsCheckBox.TabIndex = 1;
+            this.PointsCheckBox.Text = "Enabled";
+            this.PointsCheckBox.UseVisualStyleBackColor = true;
+            this.PointsCheckBox.CheckedChanged += new System.EventHandler(this.PointsCheckBox_CheckedChanged);
+            // 
+            // PointsMainPanel
+            // 
+            this.PointsMainPanel.Controls.Add(this.PointsNameBox);
+            this.PointsMainPanel.Controls.Add(this.PointsLabel);
+            this.PointsMainPanel.Location = new System.Drawing.Point(4, 18);
+            this.PointsMainPanel.Name = "PointsMainPanel";
+            this.PointsMainPanel.Size = new System.Drawing.Size(676, 330);
+            this.PointsMainPanel.TabIndex = 0;
+            // 
+            // PointsNameBox
+            // 
+            this.PointsNameBox.Location = new System.Drawing.Point(50, 8);
+            this.PointsNameBox.Name = "PointsNameBox";
+            this.PointsNameBox.Size = new System.Drawing.Size(155, 20);
+            this.PointsNameBox.TabIndex = 1;
+            this.PointsNameBox.TextChanged += new System.EventHandler(this.PointsNameBox_TextChanged);
+            // 
+            // PointsLabel
+            // 
+            this.PointsLabel.AutoSize = true;
+            this.PointsLabel.Location = new System.Drawing.Point(8, 10);
+            this.PointsLabel.Name = "PointsLabel";
+            this.PointsLabel.Size = new System.Drawing.Size(38, 13);
+            this.PointsLabel.TabIndex = 0;
+            this.PointsLabel.Text = "Name:";
+            // 
             // Plugins
             // 
             this.Plugins.Controls.Add(this.toolStrip1);
@@ -700,54 +748,6 @@
             // 
             this.AutoCommercialTimer.Interval = 1000;
             // 
-            // Points
-            // 
-            this.Points.Controls.Add(this.PointsCheckBox);
-            this.Points.Controls.Add(this.PointsMainPanel);
-            this.Points.Location = new System.Drawing.Point(4, 22);
-            this.Points.Name = "Points";
-            this.Points.Size = new System.Drawing.Size(683, 351);
-            this.Points.TabIndex = 3;
-            this.Points.Text = "Points";
-            this.Points.UseVisualStyleBackColor = true;
-            // 
-            // PointsMainPanel
-            // 
-            this.PointsMainPanel.Controls.Add(this.PointsNameBox);
-            this.PointsMainPanel.Controls.Add(this.PointsLabel);
-            this.PointsMainPanel.Location = new System.Drawing.Point(4, 18);
-            this.PointsMainPanel.Name = "PointsMainPanel";
-            this.PointsMainPanel.Size = new System.Drawing.Size(676, 330);
-            this.PointsMainPanel.TabIndex = 0;
-            // 
-            // PointsLabel
-            // 
-            this.PointsLabel.AutoSize = true;
-            this.PointsLabel.Location = new System.Drawing.Point(8, 10);
-            this.PointsLabel.Name = "PointsLabel";
-            this.PointsLabel.Size = new System.Drawing.Size(38, 13);
-            this.PointsLabel.TabIndex = 0;
-            this.PointsLabel.Text = "Name:";
-            // 
-            // PointsNameBox
-            // 
-            this.PointsNameBox.Location = new System.Drawing.Point(50, 8);
-            this.PointsNameBox.Name = "PointsNameBox";
-            this.PointsNameBox.Size = new System.Drawing.Size(155, 20);
-            this.PointsNameBox.TabIndex = 1;
-            this.PointsNameBox.TextChanged += new System.EventHandler(this.PointsNameBox_TextChanged);
-            // 
-            // PointsCheckBox
-            // 
-            this.PointsCheckBox.AutoSize = true;
-            this.PointsCheckBox.Location = new System.Drawing.Point(6, 6);
-            this.PointsCheckBox.Name = "PointsCheckBox";
-            this.PointsCheckBox.Size = new System.Drawing.Size(65, 17);
-            this.PointsCheckBox.TabIndex = 1;
-            this.PointsCheckBox.Text = "Enabled";
-            this.PointsCheckBox.UseVisualStyleBackColor = true;
-            this.PointsCheckBox.CheckedChanged += new System.EventHandler(this.PointsCheckBox_CheckedChanged);
-            // 
             // JewBot9K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -774,15 +774,15 @@
             this.AutoCommercialPanel.ResumeLayout(false);
             this.AutoCommercialPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).EndInit();
+            this.Points.ResumeLayout(false);
+            this.Points.PerformLayout();
+            this.PointsMainPanel.ResumeLayout(false);
+            this.PointsMainPanel.PerformLayout();
             this.Plugins.ResumeLayout(false);
             this.Plugins.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.Points.ResumeLayout(false);
-            this.Points.PerformLayout();
-            this.PointsMainPanel.ResumeLayout(false);
-            this.PointsMainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
