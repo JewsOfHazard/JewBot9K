@@ -22,7 +22,8 @@ namespace JewBot9K
         public static bool slowMode { get; set; }
         public static bool r9kmode { get; set; }
         public static int autoCommercialLength { get; set; }
-
+        public static bool followerResponseEnabled { get; set; }
+        public static string followerResponseText { get; set; }
 
         private static FileIniDataParser parser = new FileIniDataParser();
         private static byte[] salt = { 212, 22, 10, 73, 56, 166, 62, 245, 234, 90, 187, 130, 50, 174, 2, 250, 196, 182, 63, 175 };
@@ -110,16 +111,21 @@ namespace JewBot9K
 
             IniData data = GetIniData();
 
-            if (data.Sections.ContainsSection("DashboardSettings"))
+            try
             {
                 data["DashboardSettings"]["CommercialsEnabled"] = commercialEnabled.ToString();
                 data["DashboardSettings"]["AutoCommercialsEnabled"] = autoCommercialEnabled.ToString();
+                data["DashboardSettings"]["NewFollowerNotificationEnabled"] = followerResponseEnabled.ToString();
+                data["DashboardSettings"]["NewFollowerNotificationText"] = followerResponseText;
             }
-            else
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 data.Sections.AddSection("DashboardSettings");
                 data["DashboardSettings"].AddKey("CommercialsEnabled", commercialEnabled.ToString());
-                data["DashboardSettings"].AddKey("AutoCommercialsEnabled", autoCommercialEnabled.ToString()); 
+                data["DashboardSettings"].AddKey("AutoCommercialsEnabled", autoCommercialEnabled.ToString());
+                data["DashboardSettings"].AddKey("NewFollowerNotificationEnabled", followerResponseEnabled.ToString());
+                data["DashboardSettings"].AddKey("NewFollowerNotificationText", followerResponseText);
             }
 
 
@@ -133,7 +139,9 @@ namespace JewBot9K
 
             return new object[] {
                 data["DashboardSettings"]["CommercialsEnabled"],
-                data["DashboardSettings"]["AutoCommercialsEnabled"]
+                data["DashboardSettings"]["AutoCommercialsEnabled"],
+                data["DashboardSettings"]["NewFollowerNotificationEnabled"],
+                data["DashboardSettings"]["NewFollowerNotificationText"]
             };
         }
 

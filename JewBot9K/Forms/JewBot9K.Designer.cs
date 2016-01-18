@@ -49,6 +49,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.SessionFollowersList = new System.Windows.Forms.ListBox();
             this.FollowerAnnounceText = new System.Windows.Forms.TextBox();
             this.AnnounceFollowers = new System.Windows.Forms.CheckBox();
             this.SessionFollowersLabel = new System.Windows.Forms.Label();
@@ -85,7 +86,6 @@
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
-            this.SessionFollowersList = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -317,13 +317,24 @@
             this.panel2.Size = new System.Drawing.Size(663, 303);
             this.panel2.TabIndex = 8;
             // 
+            // SessionFollowersList
+            // 
+            this.SessionFollowersList.FormattingEnabled = true;
+            this.SessionFollowersList.Location = new System.Drawing.Point(8, 24);
+            this.SessionFollowersList.Name = "SessionFollowersList";
+            this.SessionFollowersList.Size = new System.Drawing.Size(299, 160);
+            this.SessionFollowersList.TabIndex = 4;
+            this.SessionFollowersList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SessionFollowersList_MouseDoubleClick);
+            // 
             // FollowerAnnounceText
             // 
+            this.FollowerAnnounceText.Enabled = false;
             this.FollowerAnnounceText.Location = new System.Drawing.Point(311, 51);
             this.FollowerAnnounceText.Name = "FollowerAnnounceText";
             this.FollowerAnnounceText.Size = new System.Drawing.Size(347, 20);
             this.FollowerAnnounceText.TabIndex = 3;
             this.FollowerAnnounceText.Text = "Thank you {user} for following the stream!";
+            this.FollowerAnnounceText.TextChanged += new System.EventHandler(this.FollowerAnnounceText_TextChanged);
             // 
             // AnnounceFollowers
             // 
@@ -680,15 +691,6 @@
             // AutoCommercialTimer
             // 
             this.AutoCommercialTimer.Interval = 1000;
-            // 
-            // SessionFollowersList
-            // 
-            this.SessionFollowersList.FormattingEnabled = true;
-            this.SessionFollowersList.Location = new System.Drawing.Point(8, 24);
-            this.SessionFollowersList.Name = "SessionFollowersList";
-            this.SessionFollowersList.Size = new System.Drawing.Size(299, 160);
-            this.SessionFollowersList.TabIndex = 4;
-            this.SessionFollowersList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SessionFollowersList_MouseDoubleClick);
             // 
             // JewBot9K
             // 
