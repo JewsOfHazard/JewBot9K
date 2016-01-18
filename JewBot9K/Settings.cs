@@ -177,7 +177,7 @@ namespace JewBot9K
 
             return new object[] {
                 data["Points"]["Enabled"],
-                data["Points"]["Name"],
+                data["Points"]["Name"]
             };
         }
     }

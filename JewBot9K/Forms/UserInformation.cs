@@ -30,7 +30,7 @@ namespace JewBot9K
             double messagesPerHour;
 
             messagesPerMinute = messages / timeInChat;
-            messagesPerHour = messages / timeInChat * 60;
+            messagesPerHour = messages / (timeInChat / 60);
 
             if (messagesPerHour == 1D / 0D || messagesPerMinute == 1D / 0D)
             {
