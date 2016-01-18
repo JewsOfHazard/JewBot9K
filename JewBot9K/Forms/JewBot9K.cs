@@ -329,6 +329,15 @@ namespace JewBot9K
             return fvi.FileVersion;
         }
 
+        private void LoadPointsSettings()
+        {
+            object[] items = Settings.LoadPointsSettings();
+            Settings.pointsEnabled = Convert.ToBoolean(items[0]);
+            Settings.pointsName = Convert.ToString(items[1]);
+            PointsCheckBox.Checked = Settings.pointsEnabled;
+            PointsNameBox.Text = Settings.pointsName;
+        }
+
         private void JewBot9K_Load(object sender, EventArgs e)
         {
 
@@ -342,6 +351,7 @@ namespace JewBot9K
             }
             try
             {
+                LoadPointsSettings();
                 LoadDashboardSettings();
             }
             catch (Exception ex)
@@ -688,6 +698,28 @@ namespace JewBot9K
         {
             Settings.followerResponseText = FollowerAnnounceText.Text;
             Settings.WriteDashboardToFile();
+        }
+
+        private void PointsNameBox_TextChanged(object sender, EventArgs e)
+        {
+            Settings.pointsName = PointsNameBox.Text;
+            Settings.WritePoints();
+        }
+
+        private void PointsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PointsCheckBox.Checked)
+            {
+                Settings.WritePoints();
+                Settings.pointsEnabled = true;
+                PointsMainPanel.Enabled = true;
+            }
+            else
+            {
+                Settings.WritePoints();
+                Settings.pointsEnabled = false;
+                PointsMainPanel.Enabled = false;
+            }
         }
     }
 }

@@ -24,6 +24,9 @@ namespace JewBot9K
         public static int autoCommercialLength { get; set; }
         public static bool followerResponseEnabled { get; set; }
         public static string followerResponseText { get; set; }
+        public static string pointsName { get; set; }
+        public static bool pointsEnabled { get; set; }
+
 
         private static FileIniDataParser parser = new FileIniDataParser();
         private static byte[] salt = { 212, 22, 10, 73, 56, 166, 62, 245, 234, 90, 187, 130, 50, 174, 2, 250, 196, 182, 63, 175 };
@@ -145,6 +148,38 @@ namespace JewBot9K
             };
         }
 
+
+        public static void WritePoints()
+        {
+
+            IniData data = GetIniData();
+
+            try
+            {
+                data["Points"]["Enabled"] = pointsEnabled.ToString();
+                data["Points"]["Name"] = pointsName;
+            }
+            catch (NullReferenceException)
+            {
+                data.Sections.AddSection("Points");
+                data["Points"].AddKey("Enabled", pointsEnabled.ToString());
+                data["Points"].AddKey("Name", pointsName);
+            }
+
+
+            parser.WriteFile(settingsLocation, data);
+        }
+
+        public static object[] LoadPointsSettings()
+        {
+
+            IniData data = GetIniData();
+
+            return new object[] {
+                data["Points"]["Enabled"],
+                data["Points"]["Name"],
+            };
+        }
     }
 
 }

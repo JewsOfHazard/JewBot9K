@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JewBot9K));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Chat = new System.Windows.Forms.TabPage();
             this.ViewerCountLabel = new System.Windows.Forms.Label();
             this.SubmodeToggle = new System.Windows.Forms.Button();
             this.RNineKToggle = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ConnectButton = new System.Windows.Forms.Button();
             this.AuthButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Dashboard = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.SessionFollowersList = new System.Windows.Forms.ListBox();
@@ -72,7 +72,7 @@
             this.TitleGameUpdateButton = new System.Windows.Forms.Button();
             this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
             this.GameUpdateBox = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.Plugins = new System.Windows.Forms.TabPage();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -86,53 +86,61 @@
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
+            this.Points = new System.Windows.Forms.TabPage();
+            this.PointsMainPanel = new System.Windows.Forms.Panel();
+            this.PointsLabel = new System.Windows.Forms.Label();
+            this.PointsNameBox = new System.Windows.Forms.TextBox();
+            this.PointsCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.Chat.SuspendLayout();
+            this.Dashboard.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.CommercialPanel.SuspendLayout();
             this.AutoCommercialPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
-            this.tabPage3.SuspendLayout();
+            this.Plugins.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Points.SuspendLayout();
+            this.PointsMainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.Chat);
+            this.tabControl1.Controls.Add(this.Dashboard);
+            this.tabControl1.Controls.Add(this.Points);
+            this.tabControl1.Controls.Add(this.Plugins);
             this.tabControl1.Location = new System.Drawing.Point(-1, -1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(691, 377);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // Chat
             // 
-            this.tabPage1.Controls.Add(this.ViewerCountLabel);
-            this.tabPage1.Controls.Add(this.SubmodeToggle);
-            this.tabPage1.Controls.Add(this.RNineKToggle);
-            this.tabPage1.Controls.Add(this.SlowmodeToggle);
-            this.tabPage1.Controls.Add(this.ClearChat);
-            this.tabPage1.Controls.Add(this.DisconnectButton);
-            this.tabPage1.Controls.Add(this.ChatWindow);
-            this.tabPage1.Controls.Add(this.ChatBox);
-            this.tabPage1.Controls.Add(this.VersionNumber);
-            this.tabPage1.Controls.Add(this.ViewersList);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.ConnectButton);
-            this.tabPage1.Controls.Add(this.AuthButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(683, 351);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Chat";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.Chat.Controls.Add(this.ViewerCountLabel);
+            this.Chat.Controls.Add(this.SubmodeToggle);
+            this.Chat.Controls.Add(this.RNineKToggle);
+            this.Chat.Controls.Add(this.SlowmodeToggle);
+            this.Chat.Controls.Add(this.ClearChat);
+            this.Chat.Controls.Add(this.DisconnectButton);
+            this.Chat.Controls.Add(this.ChatWindow);
+            this.Chat.Controls.Add(this.ChatBox);
+            this.Chat.Controls.Add(this.VersionNumber);
+            this.Chat.Controls.Add(this.ViewersList);
+            this.Chat.Controls.Add(this.label2);
+            this.Chat.Controls.Add(this.label1);
+            this.Chat.Controls.Add(this.ConnectButton);
+            this.Chat.Controls.Add(this.AuthButton);
+            this.Chat.Location = new System.Drawing.Point(4, 22);
+            this.Chat.Name = "Chat";
+            this.Chat.Padding = new System.Windows.Forms.Padding(3);
+            this.Chat.Size = new System.Drawing.Size(683, 351);
+            this.Chat.TabIndex = 0;
+            this.Chat.Text = "Chat";
+            this.Chat.UseVisualStyleBackColor = true;
             // 
             // ViewerCountLabel
             // 
@@ -277,16 +285,16 @@
             this.AuthButton.UseVisualStyleBackColor = true;
             this.AuthButton.Click += new System.EventHandler(this.AuthButton_Click);
             // 
-            // tabPage2
+            // Dashboard
             // 
-            this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(683, 351);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Dashboard";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.Dashboard.Controls.Add(this.panel1);
+            this.Dashboard.Location = new System.Drawing.Point(4, 22);
+            this.Dashboard.Name = "Dashboard";
+            this.Dashboard.Padding = new System.Windows.Forms.Padding(3);
+            this.Dashboard.Size = new System.Drawing.Size(683, 351);
+            this.Dashboard.TabIndex = 1;
+            this.Dashboard.Text = "Dashboard";
+            this.Dashboard.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -320,18 +328,18 @@
             // SessionFollowersList
             // 
             this.SessionFollowersList.FormattingEnabled = true;
-            this.SessionFollowersList.Location = new System.Drawing.Point(8, 24);
+            this.SessionFollowersList.Location = new System.Drawing.Point(6, 27);
             this.SessionFollowersList.Name = "SessionFollowersList";
-            this.SessionFollowersList.Size = new System.Drawing.Size(299, 160);
+            this.SessionFollowersList.Size = new System.Drawing.Size(650, 160);
             this.SessionFollowersList.TabIndex = 4;
             this.SessionFollowersList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SessionFollowersList_MouseDoubleClick);
             // 
             // FollowerAnnounceText
             // 
             this.FollowerAnnounceText.Enabled = false;
-            this.FollowerAnnounceText.Location = new System.Drawing.Point(311, 51);
+            this.FollowerAnnounceText.Location = new System.Drawing.Point(259, 4);
             this.FollowerAnnounceText.Name = "FollowerAnnounceText";
-            this.FollowerAnnounceText.Size = new System.Drawing.Size(347, 20);
+            this.FollowerAnnounceText.Size = new System.Drawing.Size(397, 20);
             this.FollowerAnnounceText.TabIndex = 3;
             this.FollowerAnnounceText.Text = "Thank you {user} for following the stream!";
             this.FollowerAnnounceText.TextChanged += new System.EventHandler(this.FollowerAnnounceText_TextChanged);
@@ -339,7 +347,7 @@
             // AnnounceFollowers
             // 
             this.AnnounceFollowers.AutoSize = true;
-            this.AnnounceFollowers.Location = new System.Drawing.Point(311, 27);
+            this.AnnounceFollowers.Location = new System.Drawing.Point(132, 5);
             this.AnnounceFollowers.Name = "AnnounceFollowers";
             this.AnnounceFollowers.Size = new System.Drawing.Size(125, 17);
             this.AnnounceFollowers.TabIndex = 2;
@@ -570,20 +578,20 @@
             this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
             this.GameUpdateBox.TabIndex = 1;
             // 
-            // tabPage3
+            // Plugins
             // 
-            this.tabPage3.Controls.Add(this.toolStrip1);
-            this.tabPage3.Controls.Add(this.panel3);
-            this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(683, 351);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Plugins";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.Plugins.Controls.Add(this.toolStrip1);
+            this.Plugins.Controls.Add(this.panel3);
+            this.Plugins.Controls.Add(this.label3);
+            this.Plugins.Controls.Add(this.textBox1);
+            this.Plugins.Controls.Add(this.pictureBox1);
+            this.Plugins.Location = new System.Drawing.Point(4, 22);
+            this.Plugins.Name = "Plugins";
+            this.Plugins.Padding = new System.Windows.Forms.Padding(3);
+            this.Plugins.Size = new System.Drawing.Size(683, 351);
+            this.Plugins.TabIndex = 2;
+            this.Plugins.Text = "Plugins";
+            this.Plugins.UseVisualStyleBackColor = true;
             // 
             // toolStrip1
             // 
@@ -692,6 +700,54 @@
             // 
             this.AutoCommercialTimer.Interval = 1000;
             // 
+            // Points
+            // 
+            this.Points.Controls.Add(this.PointsCheckBox);
+            this.Points.Controls.Add(this.PointsMainPanel);
+            this.Points.Location = new System.Drawing.Point(4, 22);
+            this.Points.Name = "Points";
+            this.Points.Size = new System.Drawing.Size(683, 351);
+            this.Points.TabIndex = 3;
+            this.Points.Text = "Points";
+            this.Points.UseVisualStyleBackColor = true;
+            // 
+            // PointsMainPanel
+            // 
+            this.PointsMainPanel.Controls.Add(this.PointsNameBox);
+            this.PointsMainPanel.Controls.Add(this.PointsLabel);
+            this.PointsMainPanel.Location = new System.Drawing.Point(4, 18);
+            this.PointsMainPanel.Name = "PointsMainPanel";
+            this.PointsMainPanel.Size = new System.Drawing.Size(676, 330);
+            this.PointsMainPanel.TabIndex = 0;
+            // 
+            // PointsLabel
+            // 
+            this.PointsLabel.AutoSize = true;
+            this.PointsLabel.Location = new System.Drawing.Point(8, 10);
+            this.PointsLabel.Name = "PointsLabel";
+            this.PointsLabel.Size = new System.Drawing.Size(38, 13);
+            this.PointsLabel.TabIndex = 0;
+            this.PointsLabel.Text = "Name:";
+            // 
+            // PointsNameBox
+            // 
+            this.PointsNameBox.Location = new System.Drawing.Point(50, 8);
+            this.PointsNameBox.Name = "PointsNameBox";
+            this.PointsNameBox.Size = new System.Drawing.Size(155, 20);
+            this.PointsNameBox.TabIndex = 1;
+            this.PointsNameBox.TextChanged += new System.EventHandler(this.PointsNameBox_TextChanged);
+            // 
+            // PointsCheckBox
+            // 
+            this.PointsCheckBox.AutoSize = true;
+            this.PointsCheckBox.Location = new System.Drawing.Point(6, 6);
+            this.PointsCheckBox.Name = "PointsCheckBox";
+            this.PointsCheckBox.Size = new System.Drawing.Size(65, 17);
+            this.PointsCheckBox.TabIndex = 1;
+            this.PointsCheckBox.Text = "Enabled";
+            this.PointsCheckBox.UseVisualStyleBackColor = true;
+            this.PointsCheckBox.CheckedChanged += new System.EventHandler(this.PointsCheckBox_CheckedChanged);
+            // 
             // JewBot9K
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -706,9 +762,9 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.JewBot9K_FormClosed);
             this.Load += new System.EventHandler(this.JewBot9K_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.Chat.ResumeLayout(false);
+            this.Chat.PerformLayout();
+            this.Dashboard.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -718,11 +774,15 @@
             this.AutoCommercialPanel.ResumeLayout(false);
             this.AutoCommercialPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.Plugins.ResumeLayout(false);
+            this.Plugins.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Points.ResumeLayout(false);
+            this.Points.PerformLayout();
+            this.PointsMainPanel.ResumeLayout(false);
+            this.PointsMainPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -730,8 +790,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage Chat;
+        private System.Windows.Forms.TabPage Dashboard;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Button AuthButton;
@@ -772,7 +832,7 @@
         private System.Windows.Forms.Label CommercialLengthLabel;
         private System.Windows.Forms.Timer CommercialLabelReset;
         private System.Windows.Forms.Timer AutoCommercialTimer;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage Plugins;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -785,6 +845,11 @@
         private System.Windows.Forms.TextBox FollowerAnnounceText;
         private System.Windows.Forms.CheckBox AnnounceFollowers;
         private System.Windows.Forms.ListBox SessionFollowersList;
+        private System.Windows.Forms.TabPage Points;
+        private System.Windows.Forms.Panel PointsMainPanel;
+        private System.Windows.Forms.TextBox PointsNameBox;
+        private System.Windows.Forms.Label PointsLabel;
+        private System.Windows.Forms.CheckBox PointsCheckBox;
     }
 }
 
