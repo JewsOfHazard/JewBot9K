@@ -446,6 +446,8 @@ namespace JewBot9K
 
             bool commercialsEnabled = Convert.ToBoolean(settings[0]);
             bool autoCommercialsEnabled = Convert.ToBoolean(settings[1]);
+            bool followerResponseEnabled = Convert.ToBoolean(settings[2]);
+            string followerResponseText = Convert.ToString(settings[3]);
 
             
             CommercialPanel.Enabled = commercialsEnabled;
@@ -459,7 +461,11 @@ namespace JewBot9K
                 OneFiftyButton.Enabled = false;
                 OneEightyButton.Enabled = false;
                 AutoCommercialCheck.Enabled = false;
-
+            }
+            if (followerResponseEnabled)
+            {
+                AnnounceFollowers.Checked = followerResponseEnabled;
+                FollowerAnnounceText.Text = followerResponseText;
             }
         }
 
@@ -647,9 +653,11 @@ namespace JewBot9K
             if (AnnounceFollowers.Checked)
             {
                 FollowerAnnounceText.Enabled = true;
+                Settings.followerResponseEnabled = true;
             }
             else
             {
+                Settings.followerResponseEnabled = false;
                 FollowerAnnounceText.Enabled = false;
             }
         }
@@ -674,6 +682,12 @@ namespace JewBot9K
                     userinfo.Show();
                 }
             }
+        }
+
+        private void FollowerAnnounceText_TextChanged(object sender, EventArgs e)
+        {
+            Settings.followerResponseText = FollowerAnnounceText.Text;
+            Settings.WriteDashboardToFile();
         }
     }
 }
