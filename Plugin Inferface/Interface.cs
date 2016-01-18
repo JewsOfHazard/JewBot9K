@@ -16,6 +16,8 @@ namespace Plugin_Inferface
         Image icon { get; }
         Form settings_page { get; }
 
+        
+
         // testname
         // this is a test plugin for the bot.
         // icon = refrence.image
