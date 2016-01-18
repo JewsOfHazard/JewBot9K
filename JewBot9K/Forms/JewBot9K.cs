@@ -20,6 +20,8 @@ namespace JewBot9K
 
         private Dictionary<string, double[]> sessionUsers = new Dictionary<string, double[]>();
         IrcClient client;
+        DateTime sessionStart;
+        private List<string> sessionFollowers = new List<string>();
 
         public JewBot9K()
         {
@@ -94,16 +96,29 @@ namespace JewBot9K
 
         private async void updateViewers()
         {
-            LiveViewers.Rootobject json;
+            LiveViewers.Rootobject viewersJson;
+            Follows.Rootobject followsJson;
             try
             {
                 using (WebClient wc = new WebClient())
                 {
-                    json = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync("https://tmi.twitch.tv/group/user/" + Settings.username + "/chatters"));
+                    viewersJson = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync($"https://tmi.twitch.tv/group/user/{Settings.username}/chatters"));
+                    followsJson = JsonConvert.DeserializeObject<Follows.Rootobject>(await wc.DownloadStringTaskAsync($"https://api.twitch.tv/kraken/channels/{Settings.username}/follows"));
                 }
+
+                Follows.Follow[] followArray = followsJson.follows;
+                foreach (Follows.Follow person in followArray)
+                {
+                    if (person.created_at > sessionStart && !sessionFollowers.Contains(person.user.display_name))
+                    {
+                        SessionFollowersTextbox.AppendText($"{person.user.display_name} \n");
+                        sessionFollowers.Add(person.user.display_name);
+                    }
+                }
+
                 ViewersList.Items.Clear();
-                ViewerCountLabel.Text = "Viewers: " + json.chatter_count;
-                foreach (string item in json.chatters.viewers)
+                ViewerCountLabel.Text = "Viewers: " + viewersJson.chatter_count;
+                foreach (string item in viewersJson.chatters.viewers)
                 {
                     ViewersList.Items.Add(item);
 
@@ -308,6 +323,7 @@ namespace JewBot9K
             {
                 Console.WriteLine(ex);
             }
+            sessionStart = DateTime.Now;
 
         }
 
