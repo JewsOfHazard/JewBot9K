@@ -68,24 +68,27 @@
             this.TitleGameUpdateButton = new System.Windows.Forms.Button();
             this.DashboardGameUpdateLabel = new System.Windows.Forms.Label();
             this.GameUpdateBox = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.DisconnectTimer = new System.Windows.Forms.Timer(this.components);
             this.TitleGameUpdateStatusTimer = new System.Windows.Forms.Timer(this.components);
             this.CommercialLabelReset = new System.Windows.Forms.Timer(this.components);
             this.AutoCommercialTimer = new System.Windows.Forms.Timer(this.components);
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SessionFollowersTextbox = new System.Windows.Forms.TextBox();
+            this.SessionFollowersLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.CommercialPanel.SuspendLayout();
             this.AutoCommercialPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AutoCommercialLength)).BeginInit();
@@ -303,9 +306,11 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.SessionFollowersLabel);
+            this.panel2.Controls.Add(this.SessionFollowersTextbox);
             this.panel2.Location = new System.Drawing.Point(3, 289);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(663, 146);
+            this.panel2.Size = new System.Drawing.Size(663, 303);
             this.panel2.TabIndex = 8;
             // 
             // RefreshChannel
@@ -521,32 +526,6 @@
             this.GameUpdateBox.Size = new System.Drawing.Size(190, 20);
             this.GameUpdateBox.TabIndex = 1;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 15000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // DisconnectTimer
-            // 
-            this.DisconnectTimer.Enabled = true;
-            this.DisconnectTimer.Interval = 250;
-            this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
-            // 
-            // TitleGameUpdateStatusTimer
-            // 
-            this.TitleGameUpdateStatusTimer.Interval = 1000;
-            this.TitleGameUpdateStatusTimer.Tick += new System.EventHandler(this.TitleGameUpdateStatusTimer_Tick);
-            // 
-            // CommercialLabelReset
-            // 
-            this.CommercialLabelReset.Interval = 3000;
-            this.CommercialLabelReset.Tick += new System.EventHandler(this.CommercialRunTimer_Tick);
-            // 
-            // AutoCommercialTimer
-            // 
-            this.AutoCommercialTimer.Interval = 1000;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.toolStrip1);
@@ -561,32 +540,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Plugins";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(7, 137);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(155, 211);
-            this.textBox1.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(334, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(144, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Available Plugins";
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(168, 31);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(509, 289);
-            this.panel3.TabIndex = 3;
             // 
             // toolStrip1
             // 
@@ -634,6 +587,32 @@
             this.toolStripButton3.Text = "Disable All";
             this.toolStripButton3.ToolTipText = "Disable all plugins listed above.";
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Location = new System.Drawing.Point(168, 31);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(509, 289);
+            this.panel3.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(334, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(144, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Available Plugins";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 137);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 211);
+            this.textBox1.TabIndex = 1;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Gainsboro;
@@ -642,6 +621,52 @@
             this.pictureBox1.Size = new System.Drawing.Size(155, 124);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 15000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // DisconnectTimer
+            // 
+            this.DisconnectTimer.Enabled = true;
+            this.DisconnectTimer.Interval = 250;
+            this.DisconnectTimer.Tick += new System.EventHandler(this.DisconnectTimer_Tick);
+            // 
+            // TitleGameUpdateStatusTimer
+            // 
+            this.TitleGameUpdateStatusTimer.Interval = 1000;
+            this.TitleGameUpdateStatusTimer.Tick += new System.EventHandler(this.TitleGameUpdateStatusTimer_Tick);
+            // 
+            // CommercialLabelReset
+            // 
+            this.CommercialLabelReset.Interval = 3000;
+            this.CommercialLabelReset.Tick += new System.EventHandler(this.CommercialRunTimer_Tick);
+            // 
+            // AutoCommercialTimer
+            // 
+            this.AutoCommercialTimer.Interval = 1000;
+            // 
+            // SessionFollowersTextbox
+            // 
+            this.SessionFollowersTextbox.Location = new System.Drawing.Point(3, 25);
+            this.SessionFollowersTextbox.Multiline = true;
+            this.SessionFollowersTextbox.Name = "SessionFollowersTextbox";
+            this.SessionFollowersTextbox.ReadOnly = true;
+            this.SessionFollowersTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SessionFollowersTextbox.Size = new System.Drawing.Size(302, 156);
+            this.SessionFollowersTextbox.TabIndex = 0;
+            // 
+            // SessionFollowersLabel
+            // 
+            this.SessionFollowersLabel.AutoSize = true;
+            this.SessionFollowersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SessionFollowersLabel.Location = new System.Drawing.Point(5, 4);
+            this.SessionFollowersLabel.Name = "SessionFollowersLabel";
+            this.SessionFollowersLabel.Size = new System.Drawing.Size(121, 17);
+            this.SessionFollowersLabel.TabIndex = 1;
+            this.SessionFollowersLabel.Text = "Session Followers";
             // 
             // JewBot9K
             // 
@@ -662,6 +687,8 @@
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.CommercialPanel.ResumeLayout(false);
             this.CommercialPanel.PerformLayout();
             this.AutoCommercialPanel.ResumeLayout(false);
@@ -730,6 +757,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label SessionFollowersLabel;
+        private System.Windows.Forms.TextBox SessionFollowersTextbox;
     }
 }
 

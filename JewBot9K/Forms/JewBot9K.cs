@@ -20,7 +20,8 @@ namespace JewBot9K
 
         private Dictionary<string, double[]> sessionUsers = new Dictionary<string, double[]>();
         IrcClient client;
-
+        DateTime sessionStart;
+        private List<string> sessionFollowers = new List<string>();
 
         public JewBot9K()
         {
@@ -57,18 +58,35 @@ namespace JewBot9K
                 {
                     sessionUsers[user] = new double[] { sessionUsers[user][0], sessionUsers[user][1] + 1 };
                 }
-                string[] splitMessage = message.Split(' ');
-                string[] parameters = new string[splitMessage.Length - 1];
-                if (splitMessage.Length > 1)
+                if (message.StartsWith("!"))
                 {
-                    for (int i = 1; i < splitMessage.Length - 1; i++)
+                    string[] splitMessage = message.Split(' ');
+                    string[] parameters = new string[splitMessage.Length - 1];
+                    if (splitMessage.Length > 1)
                     {
-                        parameters[i - 1] = splitMessage[i];
+                        for (int i = 1; i < splitMessage.Length; i++)
+                        {
+                            parameters[i - 1] = splitMessage[i];
+                        }
+                    }
+                    string sendMeToChannel;
+                    try
+                    {
+                        sendMeToChannel = CommandParser.parse(splitMessage[0].Substring(1), user, channel, parameters);
+                        if (sendMeToChannel != null)
+                        {
+                            sendMessageToIrc(sendMeToChannel);
+                        }
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        sendMessageToIrc($"I am sorry {user}, but the command \"{splitMessage[0].Substring(1)}\" is either not enabled or does not exist.");
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
+                        sendMessageToIrc($"I am sorry {user} but you have used an inproper number of parameters for the command \"{splitMessage[0].Substring(1)}\".");
                     }
                 }
-
-                CommandParser.parse(splitMessage[0], user, channel, parameters);
-
 
                 Invoke((MethodInvoker)(() => ChatWindow.AppendText(user + ": " + message + "\n")));
             };
@@ -78,16 +96,29 @@ namespace JewBot9K
 
         private async void updateViewers()
         {
-            LiveViewers.Rootobject json;
+            LiveViewers.Rootobject viewersJson;
+            Follows.Rootobject followsJson;
             try
             {
                 using (WebClient wc = new WebClient())
                 {
-                    json = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync("https://tmi.twitch.tv/group/user/" + Settings.username + "/chatters"));
+                    viewersJson = JsonConvert.DeserializeObject<LiveViewers.Rootobject>(await wc.DownloadStringTaskAsync($"https://tmi.twitch.tv/group/user/{Settings.username}/chatters"));
+                    followsJson = JsonConvert.DeserializeObject<Follows.Rootobject>(await wc.DownloadStringTaskAsync($"https://api.twitch.tv/kraken/channels/{Settings.username}/follows"));
                 }
+
+                Follows.Follow[] followArray = followsJson.follows;
+                foreach (Follows.Follow person in followArray)
+                {
+                    if (person.created_at > sessionStart && !sessionFollowers.Contains(person.user.display_name))
+                    {
+                        SessionFollowersTextbox.AppendText($"{person.user.display_name} \n");
+                        sessionFollowers.Add(person.user.display_name);
+                    }
+                }
+
                 ViewersList.Items.Clear();
-                ViewerCountLabel.Text = "Viewers: " + json.chatter_count;
-                foreach (string item in json.chatters.viewers)
+                ViewerCountLabel.Text = "Viewers: " + viewersJson.chatter_count;
+                foreach (string item in viewersJson.chatters.viewers)
                 {
                     ViewersList.Items.Add(item);
 
@@ -209,31 +240,10 @@ namespace JewBot9K
                 string message = ChatBox.Text.Replace("\r\n", string.Empty);        
 
                 ChatWindow.AppendText(Settings.displayName + ": " + message + "\n");
-
-
                 Console.WriteLine(message);
-                if (message.StartsWith("!"))
-                {
-                    if (message.StartsWith("/me"))
-                    {
-                        try
-                        {
-                            client.SendAction(message.Substring(4), client.Channels[0].Name);
-                        } 
-                        catch (ArgumentOutOfRangeException)
-                        {
-                            //This means they sent nothing after /me
-                        }
-                    }
-                    else
-                    {
-                        //action switch case here.. I lazy MAyne.
-                    }
-                }
-                else
-                {
-                    client.SendMessage(message, client.Channels[0].Name);
-                }
+
+                client.SendMessage(message, client.Channels[0].Name);
+                
                 ChatBox.Clear();
             }
         }
@@ -313,6 +323,7 @@ namespace JewBot9K
             {
                 Console.WriteLine(ex);
             }
+            sessionStart = DateTime.Now;
 
         }
 
